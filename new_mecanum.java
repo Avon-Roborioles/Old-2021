@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp
 
-public class Mecanum_Right_Strafe extends LinearOpMode {
+public class new_mecanum extends LinearOpMode {
     private DcMotor fl = null;
     private DcMotor bl = null;
     private DcMotor fr = null;
@@ -16,6 +16,7 @@ public class Mecanum_Right_Strafe extends LinearOpMode {
     private double left_x = 0;
     private double left_y=0;
     private double right_x = 0;
+    org.firstinspires.ftc.teamcode.Mecanum_Methods test = new org.firstinspires.ftc.teamcode.Mecanum_Methods(false);//set false of right strafe
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -23,7 +24,6 @@ public class Mecanum_Right_Strafe extends LinearOpMode {
         fr = hardwareMap.get(DcMotor.class, "fr");
         bl = hardwareMap.get(DcMotor.class, "bl");
         br = hardwareMap.get(DcMotor.class, "br");
-        //s1 = hardwareMap.get(CRServo.class, "s1");
         bl.setDirection(DcMotor.Direction.REVERSE);
         fl.setDirection(DcMotor.Direction.REVERSE);
 
@@ -33,26 +33,19 @@ public class Mecanum_Right_Strafe extends LinearOpMode {
             left_x = this.gamepad1.left_stick_x; //turn
             left_y = -1 * this.gamepad1.left_stick_y;
             right_x = this.gamepad1.right_stick_x; //strafe
-
-            // Denominator is the largest motor power (absolute value) or 1
-            // This ensures all the powers maintain the same ratio, but only when
-            // at least one is out of the range [-1, 1]
-            double denominator = Math.max(Math.abs(left_y) + Math.abs(left_x) + Math.abs(right_x), 1);
-            double frontLeftPower = (left_y + left_x + right_x) / denominator;
-            double backLeftPower = (left_y + left_x - right_x) / denominator;
-            double frontRightPower = (left_y - left_x - right_x) / denominator;
-            double backRightPower = (left_y - left_x + right_x) / denominator;
-
-            fl.setPower(frontLeftPower);
-            fr.setPower(frontRightPower);
-            br.setPower(backRightPower);
-            bl.setPower(backLeftPower);
+            test.update(left_y,left_x,right_x);
 
 
-            telemetry.addData("fl power: ",frontLeftPower);
-            telemetry.addData("fr power: ",frontRightPower);
-            telemetry.addData("bl power: ",backLeftPower);
-            telemetry.addData("br power: ",backRightPower);
+            fl.setPower(test.fl_power());
+            fr.setPower(test.fr_power());
+            br.setPower(test.br_power());
+            bl.setPower(test.bl_power());
+
+
+            telemetry.addData("fl power: ",fl.getPower());
+            telemetry.addData("fr power: ",fr.getPower());
+            telemetry.addData("bl power: ",bl.getPower());
+            telemetry.addData("br power: ",br.getPower());
             telemetry.update();
 
         }
@@ -71,5 +64,8 @@ public class Mecanum_Right_Strafe extends LinearOpMode {
     //    final double v2 = r * Math.cos(robotAngle) + rightX;
     //    final double v3 = r * Math.cos(robotAngle) - rightX;
     //    final double v4 = r * Math.sin(robotAngle) + rightX;
+
+
+
 
 }
