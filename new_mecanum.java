@@ -57,14 +57,6 @@ public class new_mecanum extends LinearOpMode {
 
 
 
-    //    double r = Math.hypot(left_x, left_y);
-    //    double robotAngle = Math.atan2(left_y, left_x) /*- Math.PI / 4*/;
-    //    double rightX = gamepad1.right_stick_x;
-    //    final double v1 = r * Math.sin(robotAngle) - rightX;
-    //    final double v2 = r * Math.cos(robotAngle) + rightX;
-    //    final double v3 = r * Math.cos(robotAngle) - rightX;
-    //    final double v4 = r * Math.sin(robotAngle) + rightX;
-
 
 
 
