@@ -65,15 +65,4 @@ public class Mecanum_Methods {
     public double br_power (){
         return (ly-lx*strafe_set+rx*strafe_set)/denominator;
     }
-
-
-
-
-
-
-
-
-
-
-
 }
