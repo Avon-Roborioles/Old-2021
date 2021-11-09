@@ -1,5 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class Mecanum_Methods {
 
     private boolean strafe;
@@ -11,6 +17,10 @@ public class Mecanum_Methods {
     private double ly;
     private double lx;
     private double rx;
+    private DcMotor fl = null;
+    private DcMotor bl = null;
+    private DcMotor fr = null;
+    private DcMotor br = null;
 
     /**
      *
@@ -24,45 +34,33 @@ public class Mecanum_Methods {
         strafe_set = -1;
 
     }
+    public void init_drive_motors(HardwareMap hardwareMap) {
+        fl = hardwareMap.get(DcMotor.class, "fl");
+        fr = hardwareMap.get(DcMotor.class, "fr");
+        bl = hardwareMap.get(DcMotor.class, "bl");
+        br = hardwareMap.get(DcMotor.class, "br");
+        bl.setDirection(DcMotor.Direction.REVERSE);
+        fl.setDirection(DcMotor.Direction.REVERSE);
+    }
 
+    public void run_drive_motors(Gamepad gamepad1, Telemetry telemetry){
+        ly=gamepad1.left_stick_y;
+        lx=gamepad1.left_stick_x;
+        rx=gamepad1.right_stick_x;
+        denominator = Math.abs(ly)+Math.abs(lx)+Math.abs(rx);
 
-    public void update(double l_y, double l_x, double r_x){
-        ly=l_y;
-        lx=l_x;
-        rx=r_x;
-        denominator = Math.abs(l_y)+Math.abs(l_x)+Math.abs(r_x);
+        fl.setPower((ly+lx+rx)/denominator);
+        bl.setPower((ly+lx*strafe_set-rx*strafe_set)/denominator);
+        fr.setPower((ly-lx-rx)/denominator);
+        br.setPower((ly-lx*strafe_set+rx*strafe_set)/denominator);
+
+        telemetry.addData("fl power: ",fl.getPower());
+        telemetry.addData("fr power: ",fr.getPower());
+        telemetry.addData("bl power: ",bl.getPower());
+        telemetry.addData("br power: ",br.getPower());
+        telemetry.update();
+
     }
 
 
-
-    /**
-     *
-     * @return returns the power for your front left motor
-     */
-    public double fl_power (){
-        return (ly+lx+rx)/denominator;
-    }
-    /**
-     *
-     * @return returns the power for your back left motor
-     */
-    public double bl_power (){
-        return (ly+lx*strafe_set-rx*strafe_set)/denominator;
-    }
-
-    /**
-     *
-     * @return returns the power for your front right motor
-     */
-    public double fr_power (){
-        return (ly-lx-rx)/denominator;
-    }
-
-    /**
-     *
-     * @return returns the power for your back right motor
-     */
-    public double br_power (){
-        return (ly-lx*strafe_set+rx*strafe_set)/denominator;
-    }
 }

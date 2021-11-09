@@ -20,9 +20,7 @@ public class Carousel_Call{
     //used for backpedaling at the end
     private boolean carouselMoving = false;
 
-    public void init_carousel(HardwareMap map) {
-        carousel  = map.get(DcMotor.class, "carousel");
-    }
+    public void init_carousel(HardwareMap map, String name) { carousel  = map.get(DcMotor.class, name); }
 
     public void run_carousel_loop(Gamepad gamepad1, Telemetry telemetry) {
 
