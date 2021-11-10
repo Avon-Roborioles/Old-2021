@@ -54,6 +54,27 @@ public class Carousel_Call{
             carouselStartSpeed = 0;
         }
 
+        get_telemetry(telemetry);
+    }
+
+    public void run_carousel_auto (Telemetry telemetry) {
+        carousel.setPower(carouselIncrSpeed);
+        carouselIncrSpeed+= incrAmt;
+
+        get_telemetry(telemetry);
+    }
+
+    public void stop_carousel_auto (Telemetry telemetry) {
+        displayFinalSpeed = carouselIncrSpeed;
+        carousel.setPower(-0.3);
+        get_telemetry(telemetry);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+        }
+    }
+
+    public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("End Ramp Speed", displayFinalSpeed);
         telemetry.addData("Incr Amt", incrAmt);
         telemetry.addData("Carousel Speed", "Speed = " + carouselStartSpeed);

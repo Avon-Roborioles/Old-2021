@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Final_Mecanum extends LinearOpMode {
 
-    org.firstinspires.ftc.teamcode.Mecanum_Methods drive_motors = new org.firstinspires.ftc.teamcode.Mecanum_Methods(false);//set false of right strafe
-    org.firstinspires.ftc.teamcode.Carousel_Call carousel = new org.firstinspires.ftc.teamcode.Carousel_Call();
+    private org.firstinspires.ftc.teamcode.Mecanum_Methods drive_motors = new org.firstinspires.ftc.teamcode.Mecanum_Methods(false);//set false of right strafe
+    private org.firstinspires.ftc.teamcode.Carousel_Call carousel = new org.firstinspires.ftc.teamcode.Carousel_Call();
 
     @Override
     public void runOpMode() throws InterruptedException {
