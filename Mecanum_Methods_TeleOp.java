@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Mecanum_Methods {
+public class Mecanum_Methods_TeleOp {
 
     private boolean strafe;
     private int strafe_set=1;
@@ -26,7 +26,7 @@ public class Mecanum_Methods {
      *
      * @param right_strafe if you want right strafe set true, left set false
      */
-    public Mecanum_Methods(boolean right_strafe){
+    public Mecanum_Methods_TeleOp(boolean right_strafe){
     strafe=right_strafe;
     if (strafe)
         strafe_set = 1;

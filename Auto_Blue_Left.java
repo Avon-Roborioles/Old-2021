@@ -3,13 +3,12 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 @Autonomous
 
-public class red_a_autonomus extends LinearOpMode {
+public class Auto_Blue_Left extends LinearOpMode {
 
-    private org.firstinspires.ftc.teamcode.Mecanum_Methods auto_motors = new org.firstinspires.ftc.teamcode.Mecanum_Methods(true);
+    private org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp auto_motors = new org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp(true);
     private org.firstinspires.ftc.teamcode.Carousel_Call auto_carousel = new org.firstinspires.ftc.teamcode.Carousel_Call();
 
     @Override

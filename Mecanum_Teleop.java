@@ -2,14 +2,13 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 @TeleOp
 
-public class Final_Mecanum extends LinearOpMode {
+public class Mecanum_Teleop extends LinearOpMode {
 
-    private org.firstinspires.ftc.teamcode.Mecanum_Methods drive_motors = new org.firstinspires.ftc.teamcode.Mecanum_Methods(false);//set false of right strafe
+    private org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp drive_motors = new org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp(false);//set false of right strafe
     private org.firstinspires.ftc.teamcode.Carousel_Call carousel = new org.firstinspires.ftc.teamcode.Carousel_Call();
 
     @Override
