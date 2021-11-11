@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 public class Auto_Red_Right extends LinearOpMode {
 
-    private org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp auto_motors = new org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp(true);
+    private org.firstinspires.ftc.teamcode.Mecanum_Methods_Autonomus auto_motors = new org.firstinspires.ftc.teamcode.Mecanum_Methods_Autonomus();
     private org.firstinspires.ftc.teamcode.Carousel_Call auto_carousel = new org.firstinspires.ftc.teamcode.Carousel_Call();
 
     @Override

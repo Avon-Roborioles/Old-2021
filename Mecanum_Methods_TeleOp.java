@@ -44,21 +44,7 @@ public class Mecanum_Methods_TeleOp {
         bl.setDirection(DcMotor.Direction.REVERSE);
         fl.setDirection(DcMotor.Direction.REVERSE);
     }
-    public void init_auto_drive_motors(HardwareMap hardwareMap) {
-        init_drive_motors(hardwareMap);
-        fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        fl.setTargetPosition(0);
-        fl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        fr.setTargetPosition(0);
-        fr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        bl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bl.setTargetPosition(0);
-        bl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        br.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        br.setTargetPosition(0);
-        br.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    }
+
 
     public void run_drive_motors(Gamepad gamepad1, Telemetry telemetry){
         ly=gamepad1.left_stick_y;
@@ -75,18 +61,7 @@ public class Mecanum_Methods_TeleOp {
 
     }
 
-    public void setTargetAll(int target){
-        fl.setTargetPosition(target);
-        bl.setTargetPosition(target);
-        fr.setTargetPosition(target);
-        br.setTargetPosition(target);
-    }
-    public void setTargetIndividual(int fl_target, int bl_target, int fr_target, int br_target){
-        fl.setTargetPosition(fl_target);
-        bl.setTargetPosition(bl_target);
-        fr.setTargetPosition(fr_target);
-        br.setTargetPosition(br_target);
-    }
+
 
 
     public void getTelemetry (Telemetry telemetry){
