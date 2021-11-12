@@ -50,7 +50,7 @@ public class Mecanum_Methods_TeleOp {
         ly=gamepad1.left_stick_y;
         lx=gamepad1.left_stick_x;
         rx=gamepad1.right_stick_x;
-        denominator = Math.abs(ly)+Math.abs(lx)+Math.abs(rx);
+        denominator = Math.max(Math.abs(ly)+Math.abs(lx)+Math.abs(rx), 1);
 
         fl.setPower((ly+lx+rx)/denominator);
         bl.setPower((ly+lx*strafe_set-rx*strafe_set)/denominator);
