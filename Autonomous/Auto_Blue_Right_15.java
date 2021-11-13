@@ -8,15 +8,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @Autonomous
 @Disabled
 
-public class Auto_Blue_Right_15 extends LinearOpMode {
-
-    private org.firstinspires.ftc.teamcode.Mecanum_Methods_Autonomus auto_motors = new org.firstinspires.ftc.teamcode.Mecanum_Methods_Autonomus();
-    private org.firstinspires.ftc.teamcode.Carousel_Call auto_carousel = new org.firstinspires.ftc.teamcode.Carousel_Call();
+public class Auto_Blue_Right_15 extends org.firstinspires.ftc.teamcode.Auto_Base {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        auto_motors.init_auto_drive_motors(hardwareMap);
-        auto_carousel.init_carousel(hardwareMap, "carousel");
+        this.init_classes();
         double auto_run_count = 0;
 
         waitForStart();
