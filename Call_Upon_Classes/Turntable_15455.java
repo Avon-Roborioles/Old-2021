@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Turntable {
+public class Turntable_15455 {
     private CRServo turntable = null;
     private double speed;
 

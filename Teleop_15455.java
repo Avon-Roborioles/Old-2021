@@ -3,8 +3,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 
 @TeleOp
 
@@ -12,7 +10,7 @@ public class Teleop_15455 extends LinearOpMode {
 
     private org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp drive_motors = new org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp(true);//set false for left strafe
     private org.firstinspires.ftc.teamcode.Carousel_Call carousel = new org.firstinspires.ftc.teamcode.Carousel_Call();
-    private org.firstinspires.ftc.teamcode.Turntable turntable = new org.firstinspires.ftc.teamcode.Turntable();
+    private org.firstinspires.ftc.teamcode.Turntable_15455 turntable = new org.firstinspires.ftc.teamcode.Turntable_15455();
 
     @Override
     public void runOpMode() throws InterruptedException {
