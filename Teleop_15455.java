@@ -13,6 +13,7 @@ public class Teleop_15455 extends LinearOpMode {
     private org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp drive_motors = new org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp(true);//set false for left strafe
     private org.firstinspires.ftc.teamcode.Carousel_Call carousel = new org.firstinspires.ftc.teamcode.Carousel_Call();
     private org.firstinspires.ftc.teamcode.Turntable turntable = new org.firstinspires.ftc.teamcode.Turntable();
+
     @Override
     public void runOpMode() throws InterruptedException {
         drive_motors.init_drive_motors(hardwareMap);
@@ -28,7 +29,6 @@ public class Teleop_15455 extends LinearOpMode {
 
             telemetry.update();
         }
-
     }
 
 }
