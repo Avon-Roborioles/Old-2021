@@ -67,30 +67,13 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.
  * robot's location and orientation on the field.
  *
  * To learn more about the FTC field coordinate model, see FTC_FieldCoordinateSystemDefinition.pdf in this folder
- *
- * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
- * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list.
- *
- * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
- * is explained below.
+
  */
 
 @TeleOp(name="Vuforia Field Nav Webcam", group ="Concept")
 @Disabled
 public class ConceptVuforiaFieldNavigationWebcam extends LinearOpMode {
 
-    /*
-     * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
-     * 'parameters.vuforiaLicenseKey' is initialized is for illustration only, and will not function.
-     * A Vuforia 'Development' license key, can be obtained free of charge from the Vuforia developer
-     * web site at https://developer.vuforia.com/license-manager.
-     *
-     * Vuforia license keys are always 380 characters long, and look as if they contain mostly
-     * random data. As an example, here is a example of a fragment of a valid key:
-     *      ... yIgIzTqZ4mWjk9wd3cZO9T1axEqzuhxoGlfOOI2dRzKS4T0hQ8kT ...
-     * Once you've obtained a license key, copy the string from the Vuforia web site
-     * and paste it in to your code on the next line, between the double quotes.
-     */
     private static final String VUFORIA_KEY =
             "AcMWpCb/////AAABmWwMh+/AiEzXmiaxK6KjlGgpSYMQ8DMLRSE86ee8gvcxvW/tIRp1WfznKCG5GCKhPswujU9GubTrCLojFbvILai8knxgBLMS03BKrBYsWXG4s8riKdp4XMkSYVe54lkAEG7fZWS5P9Kr8Q17sMymqN+SgX3MKKS71I7iRyLJtQPZxNesT7so72FK7hKbp4RebTn3RqHzNTPcxR+O/+kEw5AZC6unlbwn+MvFBJ8p4+OJJ3eofatHxwxOUaasYOjpu7SCLgCJrO1ELaftyMiTjLR/OjZyG/ptgZxewQTDVku+DpXaTQDsJ8I3ULWC/bA6hGzCzoM2jMP888thfBcseU8G2i/dPYswXAlPH9oJRYNP";
 

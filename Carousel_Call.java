@@ -79,6 +79,6 @@ public class Carousel_Call{
         telemetry.addData("Incr Amt", incrAmt);
         telemetry.addData("Carousel Speed", "Speed = " + carouselStartSpeed);
         telemetry.addData("Carou Encoder", "Current Pos = " + carousel.getCurrentPosition());
-        telemetry.update();
+
     }
 }
