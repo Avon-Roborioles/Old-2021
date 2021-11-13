@@ -88,7 +88,7 @@ public class RoboVision {
     private static final float halfField        = 72 * mmPerInch;
     private static final float halfTile         = 12 * mmPerInch;
     private static final float oneAndHalfTile   = 36 * mmPerInch;
-    
+
     private List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>();
 
     // Class Members
@@ -186,9 +186,6 @@ public class RoboVision {
         for (VuforiaTrackable trackable : allTrackables) {
             ((VuforiaTrackableDefaultListener) trackable.getListener()).setCameraLocationOnRobot(parameters.cameraName, cameraLocationOnRobot);
         }
-    }
-
-    public void runCamera(Telemetry telemetry) {
         /*
          * WARNING:
          * In this sample, we do not wait for PLAY to be pressed.  Target Tracking is started immediately when INIT is pressed.
@@ -205,8 +202,11 @@ public class RoboVision {
          * It is not permitted to transition to RUN while the camera preview window is active.
          * Either press STOP to exit the OpMode, or use the "options menu" again, and select "Camera Stream" to close the preview window.
          */
-
         targets.activate();
+
+    }
+
+    public void runCamera(Telemetry telemetry) {
 
         // check all the trackable targets to see which one (if any) is visible.
         targetVisible = false;
@@ -241,9 +241,12 @@ public class RoboVision {
         telemetry.update();
 
 
+
+    }
+
+    public void turn_off_camera() {
         // Disable Tracking when we are done;
         targets.deactivate();
-
     }
     /***
      * Identify a target by naming it, and setting its position and orientation on the field

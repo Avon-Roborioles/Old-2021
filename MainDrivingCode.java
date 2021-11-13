@@ -116,6 +116,7 @@ public class MainDrivingCode extends OpMode {
     @Override
     public void stop () {
         //
+        vision_class.turn_off_camera();
         telemetry.addData(">>", "Nice Job!");
     }
 }
