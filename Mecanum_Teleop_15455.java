@@ -18,14 +18,13 @@ public class Mecanum_Teleop_15455 extends LinearOpMode {
         drive_motors.init_drive_motors(hardwareMap);
         //carousel.init_carousel(hardwareMap, "carousel");
         turntable.init_turntable(hardwareMap, "turntable");
+
         waitForStart();
 
         while (opModeIsActive()) {
-
             drive_motors.run_drive_motors(gamepad1, telemetry);
             //carousel.run_carousel_loop(gamepad1, telemetry);
             turntable.run_turntable(gamepad1, telemetry);
-
 
             telemetry.update();
         }
