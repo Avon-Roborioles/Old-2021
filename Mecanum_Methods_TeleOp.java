@@ -48,14 +48,14 @@ public class Mecanum_Methods_TeleOp {
 
     public void run_drive_motors(Gamepad gamepad1, Telemetry telemetry){
         ly=-1 * gamepad1.left_stick_y;
-        lx=gamepad1.left_stick_x * strafe_set;
-        rx=gamepad1.right_stick_x * strafe_set;
+        lx=gamepad1.left_stick_x;
+        rx=gamepad1.right_stick_x;
         denominator = Math.max(Math.abs(ly)+Math.abs(lx)+Math.abs(rx), 1);
 
         fl.setPower((ly+lx+rx)/denominator);
-        bl.setPower((ly+lx-rx)/denominator);
+        bl.setPower((ly+lx* strafe_set -rx* strafe_set )/denominator);
         fr.setPower((ly-lx-rx)/denominator);
-        br.setPower((ly-lx+rx)/denominator);
+        br.setPower((ly-lx* strafe_set +rx* strafe_set )/denominator);
 
         getTelemetry(telemetry);
 
