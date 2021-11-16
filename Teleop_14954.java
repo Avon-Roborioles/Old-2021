@@ -46,7 +46,7 @@ public class Teleop_14954 extends OpMode {
         telemetry.addData("Status", "Initializing");
         drive_class.init_drive_motors(hardwareMap);
         armlift = hardwareMap.get(DcMotor.class, "armlift" );
-        carousel_class.init_carousel(hardwareMap, "carousel");
+        carousel_class.init_carousel(hardwareMap, "carousel", false);
         claw = hardwareMap.get(Servo.class, "claw");
         vision_class.initCamera(hardwareMap);
         /*

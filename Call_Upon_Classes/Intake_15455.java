@@ -20,13 +20,13 @@ public class Intake_15455{
 
     public void run_intake(Gamepad gamepad1, Telemetry telemetry) {
 
-        boolean x = gamepad1.x;
-        boolean y = gamepad1.y;
+        boolean x = gamepad1.a;
+        boolean y = gamepad1.b;
 
         if (x) {
-            speed = -0.5;
+            speed = -1;
         } else if (y) {
-            speed = 0.5;
+            speed = 1;
         } else {
             speed = 0;
         }

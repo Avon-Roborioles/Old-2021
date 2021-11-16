@@ -18,13 +18,13 @@ public class Turntable_15455 {
     }
 
     public void run_turntable(Gamepad gamepad1, Telemetry telemetry) {
-        boolean dpad_right = gamepad1.dpad_right;
-        boolean dpad_left = gamepad1.dpad_left;
+        double turn_right = gamepad1.right_trigger;
+        double turn_left = gamepad1.left_trigger;
 
-        if (dpad_left) {
-            speed = -0.5;
-        } else if (dpad_right) {
-            speed = 0.5;
+        if (turn_left-.1>0) {
+            speed = -turn_left+.1;
+        } else if (turn_right-.1>0) {
+            speed = turn_right-.1;
         } else {
             speed = 0;
         }
