@@ -238,7 +238,6 @@ public class RoboVision {
         } else {
             telemetry.addData("Visible Target", "none");
         }
-        telemetry.update();
 
 
 
