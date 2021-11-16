@@ -16,7 +16,7 @@ public class Mecanum_Methods_Autonomus {
     private DcMotor br = null;
 
 
-    public void init_drive_motors(HardwareMap hardwareMap) {
+    private void init_drive_motors(HardwareMap hardwareMap) {
         fl = hardwareMap.get(DcMotor.class, "fl");
         fr = hardwareMap.get(DcMotor.class, "fr");
         bl = hardwareMap.get(DcMotor.class, "bl");
@@ -55,13 +55,18 @@ public class Mecanum_Methods_Autonomus {
         br.setTargetPosition(br_target);
     }
 
+    public void setPowerAll(double power) {
+        fl.setPower(power);
+        bl.setPower(power);
+        fr.setPower(power);
+        br.setPower(power);
+    }
 
     public void getTelemetry (Telemetry telemetry){
-        telemetry.addData("fl power: ",fl.getPower());
-        telemetry.addData("fr power: ",fr.getPower());
-        telemetry.addData("bl power: ",bl.getPower());
-        telemetry.addData("br power: ",br.getPower());
-        telemetry.update();
+        telemetry.addData("fl encoder value: ",fl.getCurrentPosition());
+        telemetry.addData("fr encoder value: ",fr.getCurrentPosition());
+        telemetry.addData("bl encoder value: ",bl.getCurrentPosition());
+        telemetry.addData("br encoder value: ",br.getCurrentPosition());
     }
 
 
