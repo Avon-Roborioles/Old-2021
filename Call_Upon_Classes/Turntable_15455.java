@@ -11,25 +11,26 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Turntable_15455 {
     private CRServo turntable = null;
-    private double speed;
+
 
     public void init_turntable(HardwareMap map, String name) {
         turntable = map.get(CRServo.class, name);
+
     }
 
     public void run_turntable(Gamepad gamepad1, Telemetry telemetry) {
         double turn_right = gamepad1.right_trigger;
         double turn_left = gamepad1.left_trigger;
 
-        if (turn_left-.1>0) {
-            speed = -turn_left+.1;
-        } else if (turn_right-.1>0) {
-            speed = turn_right-.1;
+        if (turn_left>0) {
+            turntable.setPower( -turn_left*.8 );
+        } else if (turn_right>0) {
+            turntable.setPower( turn_right*.8 );
         } else {
-            speed = 0;
+            turntable.setPower(0);
         }
 
-        turntable.setPower(speed);
+
 
 
         get_telemetry(telemetry);

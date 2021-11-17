@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.AnalogInput;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 
 
 @TeleOp
@@ -23,6 +25,8 @@ public class Teleop_15455 extends LinearOpMode {
         intake.init_intake(hardwareMap, "intake");
         arm.init_arm(hardwareMap, "arm");
 
+
+
         waitForStart();
 
         while (opModeIsActive()) {
@@ -31,6 +35,7 @@ public class Teleop_15455 extends LinearOpMode {
             turntable.run_turntable(gamepad2, telemetry);
             intake.run_intake(gamepad2, telemetry);
             arm.run_arm(gamepad2, telemetry);
+
 
             telemetry.update();
         }

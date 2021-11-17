@@ -26,7 +26,7 @@ public class Intake_15455{
         if (x) {
             speed = -1;
         } else if (y) {
-            speed = 1;
+            speed = .7;
         } else {
             speed = 0;
         }
