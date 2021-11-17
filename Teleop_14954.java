@@ -46,18 +46,18 @@ public class Teleop_14954 extends OpMode {
         telemetry.addData("Status", "Initializing");
         drive_class.init_drive_motors(hardwareMap);
         armlift = hardwareMap.get(DcMotor.class, "armlift" );
-        carousel_class.init_carousel(hardwareMap, "carousel");
+        carousel_class.init_carousel(hardwareMap, "carousel", false);
         claw = hardwareMap.get(Servo.class, "claw");
         vision_class.initCamera(hardwareMap);
         /*
         sets armlift motor to use the encoder and resets it
-        armlift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armlift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         */
 
         //Set other motors to zero power
         armlift.setPower(0);
-        claw.setPosition(0);
+        armlift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //claw.setPosition(0);
 
         telemetry.addData(">>", "Start when ready!");
     }
@@ -76,6 +76,7 @@ public class Teleop_14954 extends OpMode {
         drive_class.run_drive_motors(gamepad1, telemetry);
         carousel_class.run_carousel_loop(gamepad1, telemetry);
         vision_class.runCamera(telemetry);
+        telemetry.addData("Armlift Position", armlift.getCurrentPosition());
 
         //when left trigger is pressed, lift arm up; if right trigger is pressed, bring arm down
         if (gamepad1.left_trigger > 0) {
@@ -99,17 +100,19 @@ public class Teleop_14954 extends OpMode {
         }
 
 
-        /*
-        if armlift is done moving, set its position to lock at
-        it will keep trying to get to the set position as long as we don't move it again
+
+        //if armlift is done moving, set its position to lock at
+        //it will keep trying to get to the set position as long as we don't move it again
 
         if (!using_armlift) {
             armlift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armlift.setTargetPosition(armlift.getCurrentPosition());
             armlift.setPower(0.5);
+        } else {
+            armlift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
 
-         */
+        telemetry.update();
 
     }
 

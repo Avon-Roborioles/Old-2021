@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -20,7 +21,7 @@ public class Carousel_Call{
     //used for backpedaling at the end
     private boolean carouselMoving = false;
 
-    public void init_carousel(HardwareMap map, String name) { carousel  = map.get(DcMotor.class, name); }
+    public void init_carousel(HardwareMap map, String name, boolean invert) { carousel  = map.get(DcMotor.class, name); if (invert) {carousel.setDirection(DcMotorSimple.Direction.REVERSE);} }
 
     public void run_carousel_loop(Gamepad gamepad1, Telemetry telemetry) {
 
