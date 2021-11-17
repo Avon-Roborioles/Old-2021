@@ -27,6 +27,5 @@ public class Distance_Sensor {
                 }
                 telemetry.addData("Distance", d);
                 telemetry.addData("Sees it", yes);
-                telemetry.update();
         }
 }
