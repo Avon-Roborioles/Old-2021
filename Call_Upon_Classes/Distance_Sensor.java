@@ -19,8 +19,8 @@ public class Distance_Sensor {
         //Distance it sees
         private double d = 0;
         //Where the position of the duck
-        private int p = 1;
-        public int station = 2;
+        public int p = 1;
+        private int station = 2;
         public void initDistance(HardwareMap hardwareMap) {
                 ds1 = hardwareMap.get(Rev2mDistanceSensor.class,"ds1");
         }
