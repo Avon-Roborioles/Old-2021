@@ -19,19 +19,16 @@ public class Distance_Sensor {
         //Distance it sees
         private double d = 0;
         //Where the position of the duck
-        private int p = 2;
-        public int station = 1;
+        private int p = 1;
+        public int station = 2;
         public void initDistance(HardwareMap hardwareMap) {
                 ds1 = hardwareMap.get(Rev2mDistanceSensor.class,"ds1");
         }
         
         public void runDistance(Telemetry telemetry) {
-                if(d<md){
+                if(d<md) {
                         yes = true;
-                        p = station;
-                }
-                else {
-                        station = 0;
+                        station = p;
                 }
                 telemetry.addData("Distance", d);
                 telemetry.addData("Sees it", yes);
