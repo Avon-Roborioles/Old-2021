@@ -4,9 +4,13 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareDevice;
+
+import org.firstinspires.ftc.teamcode.Mecanum_Methods_Autonomus;
 
 @Autonomous
-@Disabled
+
 
 public class Auto_Blue_Left_15 extends org.firstinspires.ftc.teamcode.Auto_Base {
 
@@ -17,18 +21,17 @@ public class Auto_Blue_Left_15 extends org.firstinspires.ftc.teamcode.Auto_Base 
 
         waitForStart();
 
-        while(opModeIsActive()) {
-            if(auto_run_count < 10000) { //not sure how many ticks we want, or if we should do it another way
-                auto_carousel.run_carousel_auto(telemetry);
-                auto_run_count++;
-            } else {
-                auto_carousel.stop_carousel_auto(telemetry);
-            }
+            auto_motors.goToSpot(91*39,1);
 
-        }
+            //raise arm
+                //level 1: no strafe
+                //level 2: strafe 2" right
+                //level 3: strafe 5" right
+            //output freight
 
-
-
+            auto_motors.goToSpot(91*-18,1);
+            auto_motors.turn90left(1);
+            auto_motors.goToSpot(91*36,1);
 
     }
 }

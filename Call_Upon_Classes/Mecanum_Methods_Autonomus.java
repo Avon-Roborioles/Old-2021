@@ -24,6 +24,13 @@ public class Mecanum_Methods_Autonomus {
         bl.setDirection(DcMotor.Direction.REVERSE);
         fl.setDirection(DcMotor.Direction.REVERSE);
     }
+    /*
+    the circumfrence of the wheel is 12.57 in
+    belt ration i1 1:1
+    1 rotation is 1440 ticks
+    thus 1440 ticks is 12.57 in
+    91 ticks is approx 1 inch
+    */
     public void init_auto_drive_motors(HardwareMap hardwareMap) {
         init_drive_motors(hardwareMap);
         fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -61,6 +68,37 @@ public class Mecanum_Methods_Autonomus {
         fr.setPower(power);
         br.setPower(power);
     }
+    public void setPowerIndividual(double FL, double FR, double BR, double BL){
+        fl.setPower(FL);
+        br.setPower(BR);
+        bl.setPower(BL);
+        fr.setPower(FR);
+
+    }
+    public void goToSpot(int target, double power){
+
+        setTargetIndividual(fl.getCurrentPosition()+target,bl.getCurrentPosition()+target, fr.getCurrentPosition()+target, br.getCurrentPosition()+target);
+        setPowerAll(power);
+        while (isBusy()){}
+
+    }
+
+    public void turn90left (int power){
+        setTargetIndividual( (int) Math.floor(-1440*1.5)+fl.getCurrentPosition(),(int) Math.floor(-1440*1.5)+bl.getCurrentPosition(),(int) Math.floor(1440*1.5)+ fr.getCurrentPosition(),(int) Math.floor(-1440*1.5)+br.getCurrentPosition());
+        setPowerIndividual(-1*power,1*power,1*power,-1*power);
+        while (isBusy()){}
+
+
+    }
+
+    public boolean isBusy (){
+        if (fl.isBusy()||fr.isBusy()||br.isBusy()||bl.isBusy())
+            return true;
+        else
+            return false;
+    }
+
+
 
     public void getTelemetry (Telemetry telemetry){
         telemetry.addData("fl encoder value: ",fl.getCurrentPosition());

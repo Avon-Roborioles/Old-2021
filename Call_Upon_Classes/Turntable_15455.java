@@ -23,23 +23,36 @@ public class Turntable_15455 {
         double turn_left = gamepad1.left_trigger;
 
         if (turn_left>0) {
-            turntable.setPower( -turn_left*.8 );
+            turntable.setPower( -turn_left*.88);
         } else if (turn_right>0) {
-            turntable.setPower( turn_right*.8 );
+            turntable.setPower( turn_right*.88);
         } else {
             turntable.setPower(0);
         }
-
-
-
-
         get_telemetry(telemetry);
     }
 
 
-
     public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("turntable power", turntable.getPower());
+    }
+
+
+    public void autoTable (int deg) {
+
+
+
+
 
     }
+
+
+
+
+
+
+
+
+
+
 }

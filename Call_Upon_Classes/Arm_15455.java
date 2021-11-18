@@ -47,4 +47,19 @@ public class Arm_15455{
         telemetry.addData("encoder", arm.getCurrentPosition()/22.7%360);
         telemetry.addData("Arm Speed", speed);
     }
+
+    public void autoArm (int pos){
+        if (pos==1) {}
+        if (pos==2){}
+        if (pos)
+    }
+
+
+
+
+
+
+
+
+
 }
