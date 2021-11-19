@@ -18,12 +18,12 @@ public class Auto_Blue_Right_15 extends org.firstinspires.ftc.teamcode.Auto_Base
         waitForStart();
 
         while(opModeIsActive()) {
-            if(auto_run_count < 10000) { //not sure how many ticks we want, or if we should do it another way
-                auto_carousel.run_carousel_auto(telemetry);
-                auto_run_count++;
-            } else {
-                auto_carousel.stop_carousel_auto(telemetry);
-            }
+//            if(auto_run_count < 10000) { //not sure how many ticks we want, or if we should do it another way
+//                auto_carousel.run_carousel_auto(telemetry);
+//                auto_run_count++;
+//            } else {
+//                auto_carousel.stop_carousel_auto(telemetry);
+//            }
 
         }
 

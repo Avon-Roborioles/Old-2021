@@ -60,6 +60,7 @@ public class Teleop_14954 extends OpMode {
         //claw.setPosition(0);
 
         telemetry.addData(">>", "Start when ready!");
+        telemetry.update();
     }
 
     @Override
@@ -67,6 +68,7 @@ public class Teleop_14954 extends OpMode {
     public void start() {
         //
         telemetry.addData("Status", "Running");
+        telemetry.update();
     }
 
     //runs repeatedly

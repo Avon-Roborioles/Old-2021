@@ -14,20 +14,21 @@ public class Carousel_Call{
     private DcMotor carousel = null;
     private double carouselStartSpeed = 0.37; //base speed
     private double carouselIncrSpeed = carouselStartSpeed; //speed as carousel is running and increasing
-    private double displayFinalSpeed = carouselIncrSpeed; //for display
+    private double carouselDcrSpeed = -1 * carouselStartSpeed;
+    private double displayFinalSpeed = 0; //for display
     
     private double incrAmt = 0.0008; //as carousel runs, increases by this value (.08%)
 
     //used for backpedaling at the end
-    private boolean carouselMoving = false;
+    private boolean carouselMovingForwards = false;
+    private boolean carouselMovingBackwards = false;
 
     public void init_carousel(HardwareMap map, String name, boolean invert) { carousel  = map.get(DcMotor.class, name); if (invert) {carousel.setDirection(DcMotorSimple.Direction.REVERSE);} }
 
     public void run_carousel_loop(Gamepad gamepad1, Telemetry telemetry) {
-
         //back-pedals a tiny bit once motor stops running
         //updates the final speed it reached from increments to display
-        if(carouselMoving && !gamepad1.x) {
+        if(carouselMovingForwards && !gamepad1.x) {
             displayFinalSpeed = carouselIncrSpeed;
             carouselIncrSpeed = carouselStartSpeed;
             carousel.setPower(-0.3);
@@ -35,45 +36,62 @@ public class Carousel_Call{
                 Thread.sleep(100);
             } catch (InterruptedException e) {
             }
-            carouselMoving = false;
+            carouselMovingForwards = false;
         }
+        if (carouselMovingBackwards && !gamepad1.b) {
+            displayFinalSpeed = carouselDcrSpeed;
+            carouselDcrSpeed = -1 * carouselStartSpeed;
+            carousel.setPower(0.3);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+            }
+            carouselMovingBackwards = false;
+        }
+
+
 
         //controls whether motor is running or not
         //increases pace while pressed
-        if (gamepad1.x) {
+        if(gamepad1.x && gamepad1.b) {
+            carousel.setPower(0); //why have you done this
+        } else if (gamepad1.x) {
             carousel.setPower(carouselIncrSpeed);
-            carouselIncrSpeed+= incrAmt;
-            carouselMoving = true;
+            if(carouselIncrSpeed < .6) {
+                carouselIncrSpeed += incrAmt;
+            }
+            carouselMovingForwards = true;
+            carouselMovingBackwards = false;
+        } else if (gamepad1.b) {
+            carousel.setPower(carouselDcrSpeed);
+            if (carouselDcrSpeed > -.6) {
+                carouselDcrSpeed -= incrAmt;
+            }
+            carouselMovingBackwards = true;
+            carouselMovingForwards = false;
         } else {
             carousel.setPower(0);
         }
 
-        //min/max - if exceed, then resets to min or max
-        if(carouselStartSpeed > 0.6) {
-            carouselStartSpeed = 0.6;
-        } else if (carouselStartSpeed < 0) {
-            carouselStartSpeed = 0;
-        }
-
         get_telemetry(telemetry);
     }
 
-    public void run_carousel_auto (Telemetry telemetry) {
-        carousel.setPower(carouselIncrSpeed);
-        carouselIncrSpeed+= incrAmt;
-
-        get_telemetry(telemetry);
-    }
-
-    public void stop_carousel_auto (Telemetry telemetry) {
-        displayFinalSpeed = carouselIncrSpeed;
-        carousel.setPower(-0.3);
-        get_telemetry(telemetry);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-        }
-    }
+//    public void run_carousel_auto (Telemetry telemetry) {
+//        carousel.setPower(carouselIncrSpeed);
+//        carouselIncrSpeed+= incrAmt;
+//
+//        get_telemetry(telemetry);
+//    }
+//
+//    public void stop_carousel_auto (Telemetry telemetry) {
+//        displayFinalSpeed = carouselIncrSpeed;
+//        carousel.setPower(-0.3);
+//        get_telemetry(telemetry);
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//        }
+//    }
 
     public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("End Ramp Speed", displayFinalSpeed);

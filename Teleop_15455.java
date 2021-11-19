@@ -25,8 +25,6 @@ public class Teleop_15455 extends LinearOpMode {
         intake.init_intake(hardwareMap, "intake");
         arm.init_arm(hardwareMap, "arm");
 
-
-
         waitForStart();
 
         while (opModeIsActive()) {

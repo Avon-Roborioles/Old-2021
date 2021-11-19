@@ -17,20 +17,26 @@ public class Distance_Sensor {
         //Max Distance
         private double md = 2.8*12;
         //Distance it sees
-        private double d = 0;
+        private double dis = 0;
         //Where the position of the duck
-        public int p = 1;
-        private int station = 2;
+        private int pos = 1;
         public void initDistance(HardwareMap hardwareMap) {
                 ds1 = hardwareMap.get(Rev2mDistanceSensor.class,"ds1");
         }
         
         public void runDistance(Telemetry telemetry) {
-                if(d<md) {
+                if(dis<md&&pos!=2) {
                         yes = true;
-                        station = p;
                 }
-                telemetry.addData("Distance", d);
+                else if(pos==1&&!yes) {
+                        pos = 0;
+                }
+                else if(pos==0&&!yes) {
+                        pos = 2;
+                        yes = true;
+                }
+                telemetry.addData("Distance", dis);
+                telemetry.addData("Position",pos);
                 telemetry.addData("Sees it", yes);
         }
 }
