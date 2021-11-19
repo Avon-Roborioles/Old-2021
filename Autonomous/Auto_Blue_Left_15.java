@@ -20,8 +20,6 @@ public class Auto_Blue_Left_15 extends org.firstinspires.ftc.teamcode.Auto_Base 
 
         waitForStart();
 
-        auto_motors.goToSpot(1440, 1);
-
         auto_motors.goToSpot(inchToTicks*39,1);
 
         //raise arm
