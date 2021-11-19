@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-//STILL A WIP
 
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -10,21 +9,33 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 public class Distance_Sensor {
+
         //the sensor
         private Rev2mDistanceSensor ds1 = null;
         //variable for if it sees it
         public boolean yes = false;
-        //Max Distance
+        //Max Distance to see it
         private double md = 2.8*12;
-        //Distance it sees
+        //Distance it is seeing right now
         private double dis = 0;
-        //Where the position of the duck
+        //Where the position of the duck is
         private int pos = 1;
-        public void initDistance(HardwareMap hardwareMap) {
+
+        private Telemetry telemetry = null;
+
+        public void initDistance(HardwareMap hardwareMap, Telemetry telemetry) {
                 ds1 = hardwareMap.get(Rev2mDistanceSensor.class,"ds1");
         }
-        
-        public void runDistance(Telemetry telemetry) {
+
+        public boolean checkSeesSomething() {
+                getTelemetry();
+
+                if(ds1.getDistance(DistanceUnit.INCH) < md) {
+                        return true;
+                } return false;
+        }
+
+        public void runDistance() {
                 if(dis<md&&pos!=2) {
                         yes = true;
                 }
@@ -35,6 +46,9 @@ public class Distance_Sensor {
                         pos = 2;
                         yes = true;
                 }
+        }
+
+        public void getTelemetry() {
                 telemetry.addData("Distance", dis);
                 telemetry.addData("Position",pos);
                 telemetry.addData("Sees it", yes);

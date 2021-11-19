@@ -19,13 +19,13 @@ public class Teleop_14954 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         drivingMotors.init_drive_motors(hardwareMap);
         carousel.init_carousel(hardwareMap, "carousel", true);
-        armlift.init_arm(hardwareMap, "armlift");
+        armlift.init_armlift(hardwareMap, "armlift");
         intake.init_intake(hardwareMap, "intake");
 
-        whileForStart();
+        waitForStart();
 
         while (opModeIsActive()) {
-            drive_motors.run_drive_motors(gamepad1, telemetry);
+            drivingMotors.run_drive_motors(gamepad1, telemetry);
             carousel.run_carousel_loop(gamepad1, telemetry);
             armlift.run_arm(gamepad1, telemetry);
             intake.run_intake(gamepad1, telemetry);

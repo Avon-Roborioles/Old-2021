@@ -9,7 +9,7 @@ public class Test_Drive extends OpMode {
 
     @Override
     public void init() {
-        distance_class.initDistance(hardwareMap);
+        distance_class.initDistance(hardwareMap, telemetry);
         telemetry.addData(">>>","Start When Ready");
         telemetry.update();
     }
@@ -22,7 +22,7 @@ public class Test_Drive extends OpMode {
 
     @Override
     public void loop() {
-       distance_class.runDistance(telemetry);
+       distance_class.runDistance();
 
     }
 }
