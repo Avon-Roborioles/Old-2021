@@ -14,6 +14,7 @@ public class Mecanum_Methods_Autonomus {
     private DcMotor bl = null;
     private DcMotor fr = null;
     private DcMotor br = null;
+    private Telemetry telemetry = null;
 
 
     private void init_drive_motors(HardwareMap hardwareMap) {
@@ -25,14 +26,15 @@ public class Mecanum_Methods_Autonomus {
         fl.setDirection(DcMotor.Direction.REVERSE);
     }
     /*
-    the circumfrence of the wheel is 12.57 in
-    belt ration i1 1:1
+    the circumference of the wheel is 12.57 in
+    belt ration is 1:1
     1 rotation is 1440 ticks
     thus 1440 ticks is 12.57 in
     91 ticks is approx 1 inch
     */
-    public void init_auto_drive_motors(HardwareMap hardwareMap) {
+    public void init_auto_drive_motors(HardwareMap hardwareMap, Telemetry telemetry) {
         init_drive_motors(hardwareMap);
+        this.telemetry = telemetry;
         fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         fl.setTargetPosition(0);
         fl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -47,19 +49,32 @@ public class Mecanum_Methods_Autonomus {
         br.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-
-
     public void setTargetAll(int target){
         fl.setTargetPosition(target);
         bl.setTargetPosition(target);
         fr.setTargetPosition(target);
         br.setTargetPosition(target);
     }
+
+    public void setRelativeTargetAll(int target) {
+        fl.setTargetPosition(fl.getCurrentPosition() + target);
+        bl.setTargetPosition(bl.getCurrentPosition() + target);
+        fr.setTargetPosition(fr.getCurrentPosition() + target);
+        br.setTargetPosition(br.getCurrentPosition() + target);
+    }
+
     public void setTargetIndividual(int fl_target, int bl_target, int fr_target, int br_target){
         fl.setTargetPosition(fl_target);
         bl.setTargetPosition(bl_target);
         fr.setTargetPosition(fr_target);
         br.setTargetPosition(br_target);
+    }
+
+    public void setRelativeTargetIndividual(int fl_target, int bl_target, int fr_target, int br_target) {
+        fl.setTargetPosition(fl_target + fl.getCurrentPosition());
+        bl.setTargetPosition(bl_target + bl.getCurrentPosition());
+        fr.setTargetPosition(fr_target + fr.getCurrentPosition());
+        br.setTargetPosition(br_target + br.getCurrentPosition());
     }
 
     public void setPowerAll(double power) {
@@ -68,6 +83,7 @@ public class Mecanum_Methods_Autonomus {
         fr.setPower(power);
         br.setPower(power);
     }
+
     public void setPowerIndividual(double FL, double FR, double BR, double BL){
         fl.setPower(FL);
         br.setPower(BR);
@@ -75,23 +91,23 @@ public class Mecanum_Methods_Autonomus {
         fr.setPower(FR);
 
     }
-    public void goToSpot(int target, double power){
 
-        setTargetIndividual(fl.getCurrentPosition()+target,bl.getCurrentPosition()+target, fr.getCurrentPosition()+target, br.getCurrentPosition()+target);
+    public void goToSpot(int target, double power){
+        setRelativeTargetAll(target);
         setPowerAll(power);
         while (isBusy()){}
-
     }
 
     public void turn90left (int power){
-        setTargetIndividual( (int) Math.floor(-1440*1.5)+fl.getCurrentPosition(),(int) Math.floor(-1440*1.5)+bl.getCurrentPosition(),(int) Math.floor(1440*1.5)+ fr.getCurrentPosition(),(int) Math.floor(-1440*1.5)+br.getCurrentPosition());
+        setRelativeTargetAll((int) Math.floor(-1440*1.5));
         setPowerIndividual(-1*power,1*power,1*power,-1*power);
         while (isBusy()){}
-
-
     }
 
     public boolean isBusy (){
+        getTelemetry(telemetry);
+        telemetry.update();
+
         if (fl.isBusy()||fr.isBusy()||br.isBusy()||bl.isBusy())
             return true;
         else
@@ -106,11 +122,4 @@ public class Mecanum_Methods_Autonomus {
         telemetry.addData("bl encoder value: ",bl.getCurrentPosition());
         telemetry.addData("br encoder value: ",br.getCurrentPosition());
     }
-
-
-
-
-
-
-
 }

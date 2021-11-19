@@ -24,7 +24,7 @@ public class Arm_15455{
         boolean dpad_up = gamepad1.dpad_up;
         boolean dpad_down = gamepad1.dpad_down;
 
-        if (dpad_up && pos<=77) {
+        if (dpad_up && pos<=85) {
             speed = 1;
         } else if (dpad_down&&pos>=1) {
             speed = -1;
