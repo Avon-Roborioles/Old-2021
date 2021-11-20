@@ -135,6 +135,13 @@ public class Mecanum_Methods_Autonomus {
 
 
 
+    public void waitForDone(Telemetry telemetry) {
+        while(fl.isBusy()) {
+            getTelemetry(telemetry);
+            telemetry.update();
+        }
+    }
+
     public void getTelemetry (Telemetry telemetry){
         telemetry.addData("fl encoder value: ",fl.getCurrentPosition());
         telemetry.addData("fr encoder value: ",fr.getCurrentPosition());

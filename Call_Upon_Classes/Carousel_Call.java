@@ -10,7 +10,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 //hi
-public class Carousel_Call{
+public class
+Carousel_Call{
     private DcMotor carousel = null;
     private double carouselStartSpeed = 0.37; //base speed
     private double carouselIncrSpeed = carouselStartSpeed; //speed as carousel is running and increasing

@@ -12,7 +12,7 @@ public class Teleop_14954 extends LinearOpMode {
     private final org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp drivingMotors = new org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp(false);
     private final org.firstinspires.ftc.teamcode.Carousel_Call carousel = new org.firstinspires.ftc.teamcode.Carousel_Call();
     private final org.firstinspires.ftc.teamcode.Arm_14954 armlift = new org.firstinspires.ftc.teamcode.Arm_14954();
-    private org.firstinspires.ftc.teamcode.Intake_14954 intake = new org.firstinspires.ftc.teamcode.Intake_14954();
+    private final org.firstinspires.ftc.teamcode.Intake_14954 intake = new org.firstinspires.ftc.teamcode.Intake_14954();
 
 
     @Override
@@ -21,6 +21,8 @@ public class Teleop_14954 extends LinearOpMode {
         carousel.init_carousel(hardwareMap, "carousel", true);
         armlift.init_armlift(hardwareMap, "armlift");
         intake.init_intake(hardwareMap, "intake");
+        telemetry.addData(">>", "Start when ready!");
+
 
         waitForStart();
 
