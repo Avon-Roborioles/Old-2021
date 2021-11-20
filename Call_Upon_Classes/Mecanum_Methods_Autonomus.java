@@ -105,8 +105,7 @@ public class Mecanum_Methods_Autonomus {
     }
 
     public boolean isBusy (){
-        getTelemetry(telemetry);
-        telemetry.update();
+//        getTelemetry(telemetry);
 
         if (fl.isBusy()||fr.isBusy()||br.isBusy()||bl.isBusy())
             return true;

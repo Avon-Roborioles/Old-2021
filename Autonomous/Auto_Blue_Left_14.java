@@ -7,8 +7,7 @@ public class Auto_Blue_Left_14 extends org.firstinspires.ftc.teamcode.Auto_Base 
 
     @Override
     public void runOpMode() throws InterruptedException {
-        distance_sensor.initDistance(hardwareMap, telemetry, false);
-
+        distance_sensor.initDistance(hardwareMap, telemetry, true);
         init_classes();
 
         waitForStart();
@@ -18,7 +17,7 @@ public class Auto_Blue_Left_14 extends org.firstinspires.ftc.teamcode.Auto_Base 
         if(distance_sensor.checkSeesSomething()) {
             scorePosition = 2;
         }
-        auto_motors.goToSpot(inchToTicks * 8, 1);
+        auto_motors.goToSpot(inchToTicks * -8, 1);
 
         if(distance_sensor.checkSeesSomething()) {
             scorePosition = 1;
