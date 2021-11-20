@@ -35,18 +35,18 @@ public class Distance_Sensor {
                 } return false;
         }
 
-        public void runDistance() {
-                if(dis<md&&pos!=2) {
-                        yes = true;
-                }
-                else if(pos==1&&!yes) {
-                        pos = 0;
-                }
-                else if(pos==0&&!yes) {
-                        pos = 2;
-                        yes = true;
-                }
-        }
+//        public void runDistance() {
+//                if(dis<md&&pos!=2) {
+//                        yes = true;
+//                }
+//                else if(pos==1&&!yes) {
+//                        pos = 0;
+//                }
+//                else if(pos==0&&!yes) {
+//                        pos = 2;
+//                        yes = true;
+//                }
+//        }
 
         public void getTelemetry() {
                 telemetry.addData("Distance", dis);
