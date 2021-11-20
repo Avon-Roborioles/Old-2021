@@ -20,13 +20,13 @@ public class Intake_15455{
 
     public void run_intake(Gamepad gamepad1, Telemetry telemetry) {
 
-        boolean x = gamepad1.a;
-        boolean y = gamepad1.y;
+        boolean in = gamepad1.a;
+        boolean out = gamepad1.y;
 
-        if (x) {
+        if (in) {
             speed = -1;
-        } else if (y) {
-            speed = .8;
+        } else if (out) {
+            speed = .6;
         } else {
             speed = 0;
         }
@@ -36,6 +36,11 @@ public class Intake_15455{
         get_telemetry(telemetry);
     }
 
+    public void autoEject() throws InterruptedException {
+        intake.setPower(.6);
+        Thread.sleep(1000);
+        intake.setPower(0);
+    }
 
 
     public void get_telemetry (Telemetry telemetry) {
