@@ -10,8 +10,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 public class Distance_Sensor {
 
-        //the sensor
-        private Rev2mDistanceSensor ds1 = null;
+
+        //the sensors
+        private Rev2mDistanceSensor ds = null;
         //variable for if it sees it
         public boolean yes = false;
         //Max Distance to see it
@@ -23,14 +24,20 @@ public class Distance_Sensor {
 
         private Telemetry telemetry = null;
 
-        public void initDistance(HardwareMap hardwareMap, Telemetry telemetry) {
-                ds1 = hardwareMap.get(Rev2mDistanceSensor.class,"ds1");
+        public void initDistance(HardwareMap hardwareMap, Telemetry telemetry, boolean redAlliance) {
+                if(redAlliance) {
+                        ds = hardwareMap.get(Rev2mDistanceSensor.class,"ds2"); //left side sensor
+                } else {
+                        ds = hardwareMap.get(Rev2mDistanceSensor.class,"ds1"); //right side sensor
+                }
+
+                this.telemetry = telemetry;
         }
 
         public boolean checkSeesSomething() {
                 getTelemetry();
 
-                if(ds1.getDistance(DistanceUnit.INCH) < md) {
+                if(ds.getDistance(DistanceUnit.INCH) < md) {
                         return true;
                 } return false;
         }
@@ -49,8 +56,8 @@ public class Distance_Sensor {
 //        }
 
         public void getTelemetry() {
-                telemetry.addData("Distance", dis);
-                telemetry.addData("Position",pos);
-                telemetry.addData("Sees it", yes);
+                telemetry.addData("Distance", ds.getDistance(DistanceUnit.INCH));
+//                telemetry.addData("Position",pos);
+//                telemetry.addData("Sees it", yes);
         }
 }

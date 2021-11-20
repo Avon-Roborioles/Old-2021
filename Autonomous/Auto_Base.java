@@ -13,6 +13,5 @@ public abstract class Auto_Base extends LinearOpMode {
     public void init_classes() {
         auto_motors.init_auto_drive_motors(hardwareMap, telemetry);
         auto_carousel.init_carousel(hardwareMap, "carousel", false);
-        distance_sensor.initDistance(hardwareMap, telemetry);
     }
 }
