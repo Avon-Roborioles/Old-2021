@@ -17,6 +17,7 @@ public class Arm_15455{
 
     public void init_arm(HardwareMap map, String name) {
         arm  = map.get(DcMotor.class, name);
+
     }
 
     public void run_arm(Gamepad gamepad1, Telemetry telemetry) {
@@ -42,13 +43,22 @@ public class Arm_15455{
         telemetry.addData("Arm Speed", speed);
     }
 
-    public void autoArm (int pos){
-        if (pos==1) {}
-        if (pos==2) {}
-        if (pos==3) {}
+    public void autoArmUp(int pos){
+        if (pos==1) {arm.setTargetPosition((int) (30*22.7));}
+        if (pos==2) {arm.setTargetPosition((int) (60*22.7));}
+        if (pos>=3) {arm.setTargetPosition((int) (85*22.7));}
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setPower(1);
+        while (arm.isBusy()){}
+
+
     }
 
-
+    public void autoArmDown (){
+        arm.setTargetPosition(5);
+        arm.setPower(-1);
+        while (arm.isBusy()){}
+    }
 
 
 
