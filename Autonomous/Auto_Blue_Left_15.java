@@ -16,9 +16,11 @@ public class Auto_Blue_Left_15 extends org.firstinspires.ftc.teamcode.Auto_Base 
         waitForStart();
 
 //        auto_motors.goToSpot(inchToTicks*39,1);
-        arm.autoArmUp(2);
-        intake.autoEject();
-        arm.autoArmDown();
+//        arm.autoArmUp(2);
+//        intake.autoEject();
+//        arm.autoArmDown();
+        auto_motors.strafeRight(1, 10);
+
 
 
 
@@ -30,7 +32,7 @@ public class Auto_Blue_Left_15 extends org.firstinspires.ftc.teamcode.Auto_Base 
         //output freight
 
 //        auto_motors.goToSpot(inchToTicks*-18,1);
-//        auto_motors.turn90left(1);
+        auto_motors.turn90left(1);
 //        auto_motors.goToSpot(inchToTicks*36,1);
 
     }

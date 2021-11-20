@@ -98,11 +98,31 @@ public class Mecanum_Methods_Autonomus {
         while (isBusy()){}
     }
 
-    public void turn90left (int power){
-        setRelativeTargetAll((int) Math.floor(-1440*1.5));
-        setPowerIndividual(-1*power,1*power,1*power,-1*power);
+    public void turn90left (double power){
+        setRelativeTargetIndividual((int) Math.floor(-1440*1.2),(int) Math.floor(-1440*1.2),(int) Math.floor(1440*1.2), (int) Math.floor(1440*1.2));
+        setPowerIndividual(-power,power,power,-power);
         while (isBusy()){}
     }
+    public void turn90right (double power){
+        setRelativeTargetIndividual((int) Math.floor(1440*1.2),(int) Math.floor(1440*1.2),(int) Math.floor(-1440*1.2), (int) Math.floor(-1440*1.2));
+        setPowerIndividual(power,-power,-power,power);
+        while (isBusy()){}
+    }
+
+    public void strafeRight (double power, int inches) {
+        //107 ticks= 1 inch
+        inches*=107;
+        setRelativeTargetIndividual(-inches, inches,inches,-inches);
+        setPowerIndividual(-power, power, -power, power);
+        while (isBusy()){}
+    }
+    public void strafeLeft (double power, int inches) {
+        inches*=107;
+        setRelativeTargetIndividual(inches,-inches,-inches,inches);
+        setPowerIndividual(power, -power, power, -power);
+        while (isBusy()){}
+    }
+
 
     public boolean isBusy (){
 //        getTelemetry(telemetry);
