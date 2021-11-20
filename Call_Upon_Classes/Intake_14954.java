@@ -1,40 +1,38 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Intake_14954 {
-    private DcMotor intake = null;
-    private double speed;
+    private CRServo intake = null;
+    private double speed = 0;
 
-    public void init_intake(HardwareMap map, String name) { intake  = map.get(DcMotor.class, name); }
+    public void init_intake(HardwareMap map, String name) { intake = map.get(CRServo.class, name); }
 
 
     public void run_intake(Gamepad gamepad1, Telemetry telemetry) {
 
-        boolean x = gamepad1.x;
-        boolean b = gamepad1.b;
+        boolean lbumper = gamepad1.left_bumper;
+        boolean rbumper = gamepad1.right_bumper;
 
-        if (x) {
-            speed = 1;
-        } else if (b) {
-            speed = -1;
+        if (lbumper) {
+            intake.setPower(0.75);
+        } else if (rbumper) {
+            intake.setPower(-0.75);
         } else {
-            speed = 0;
+            intake.setPower(0);
         }
 
-        intake.setPower(speed);
+       // intake.setPosition(speed);
 
         get_telemetry(telemetry);
     }
 
 
     public void get_telemetry (Telemetry telemetry) {
-        telemetry.addData("Intake Speed", speed);
+        telemetry.addData("Armlift Speed", speed);
     }
 }

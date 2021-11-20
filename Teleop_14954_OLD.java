@@ -3,11 +3,10 @@
 
  This code includes all features below:
     - Informs driver/s on current status of the robot (Initialized, running etc.)
-    - Passive arm stabilizer with built in encoders (Working on it :) )
+    - Passive arm stabilizer with built in encoders
     - Advanced Mecanum Driving with the left joystick
     - lifting the main arm with the left & right triggers
-    - Spinning the intake with the left & right bumpers
-    - Using the carousel with the x and b buttons
+    - opening and closing the claw with the left & right bumpers
 
  Make sure to setup these device names on the robot:
 
@@ -22,23 +21,23 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 //Tells robot this code is for driving
 @TeleOp
-
-public class Teleop_14954V1 extends OpMode {
+@Disabled
+public class Teleop_14954_OLD extends OpMode {
 
     //variables for motors and other things
     public DcMotor armlift = null;
-    public Servo claw = null;
+    public CRServo intake = null;
     boolean using_armlift = false;
     private final org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp drive_class = new org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp(false);
     private final org.firstinspires.ftc.teamcode.Carousel_Call carousel_class = new org.firstinspires.ftc.teamcode.Carousel_Call();
-    private final org.firstinspires.ftc.teamcode.RoboVision vision_class = new org.firstinspires.ftc.teamcode.RoboVision();
     @Override
     //runs once
     public void init() {
@@ -48,8 +47,9 @@ public class Teleop_14954V1 extends OpMode {
         drive_class.init_drive_motors(hardwareMap);
         armlift = hardwareMap.get(DcMotor.class, "armlift" );
         carousel_class.init_carousel(hardwareMap, "carousel", false);
-        claw = hardwareMap.get(Servo.class, "claw");
-        //vision_class.initCamera(hardwareMap);
+        intake = hardwareMap.get(CRServo.class, "intake");
+
+        // vision_class.initCamera(hardwareMap);
         /*
         sets armlift motor to use the encoder and resets it
         armlift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -57,7 +57,7 @@ public class Teleop_14954V1 extends OpMode {
 
         //Set other motors to zero power
         armlift.setPower(0);
-        armlift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        // armlift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //claw.setPosition(0);
 
         telemetry.addData(">>", "Start when ready!");
@@ -77,7 +77,7 @@ public class Teleop_14954V1 extends OpMode {
         drive_class.run_drive_motors(gamepad1, telemetry);
         carousel_class.run_carousel_loop(gamepad1, telemetry);
         //vision_class.runCamera(telemetry);
-        telemetry.addData("Armlift Position", armlift.getCurrentPosition());
+        //telemetry.addData("Armlift Position", armlift.getCurrentPosition());
 
         //when left trigger is pressed, lift arm up; if right trigger is pressed, bring arm down
         if (gamepad1.left_trigger > 0) {
@@ -93,32 +93,34 @@ public class Teleop_14954V1 extends OpMode {
 
         //when left bumper pressed, intake forward, if right bumper pressed, intake reverse
         if (gamepad1.left_bumper) {
-            claw.setPosition(0.8);
+            intake.setPower(0.75);
         } else if (gamepad1.right_bumper) {
-            claw.setPosition(0.3);
+            intake.setPower(-0.75);
         } else {
-            claw.setPosition(0);
+            intake.setPower(0);
         }
 
         //if armlift is done moving, set its position to lock at
         //it will keep trying to get to the set position as long as we don't move it again
-        /*
-        if (!using_armlift) {
-            armlift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            armlift.setTargetPosition(armlift.getCurrentPosition());
-            armlift.setPower(0.5);
-        } else {
-            armlift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-            */
+
+//        if (!using_armlift) {
+//            armlift.setTargetPosition(armlift.getCurrentPosition());
+//            armlift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            armlift.setPower(0.5);
+//        } else {
+//            armlift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        }
 
         telemetry.update();
+
     }
 
     @Override
     public void stop () {
         //
-        vision_class.turn_off_camera();
+
+
+        //vision_class.turn_off_camera();
         telemetry.addData(">>", "Nice Job!");
     }
 }

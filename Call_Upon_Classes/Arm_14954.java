@@ -22,9 +22,9 @@ public class Arm_14954 {
         double rtrigger = gamepad1.right_trigger;
         
         if (ltrigger > 0) {
-            speed = 0.75;
+            speed = 0.5;
         } else if (rtrigger > 0 ) {
-            speed = -0.75;
+            speed = -0.5;
         } else {
             speed = 0;
         }
