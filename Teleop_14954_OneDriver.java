@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp
 
-public class Teleop_14954 extends LinearOpMode {
+public class Teleop_14954_OneDriver extends LinearOpMode {
 
     //objects for each function of the robot
     private final org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp drivingMotors = new org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp(false);
@@ -27,10 +27,11 @@ public class Teleop_14954 extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            drivingMotors.run_drive_motors(gamepad1, telemetry);
-            carousel.run_carousel_loop(gamepad1, telemetry);
-            armlift.run_arm(gamepad1, telemetry);
-            intake.run_intake(gamepad1, telemetry);
+            //Driver 1 Functions
+            drivingMotors.run_drive_motors(gamepad1, telemetry); //driving
+            carousel.run_carousel_loop(gamepad1, telemetry); //carousel
+            armlift.run_arm(gamepad1, telemetry); //arm
+            intake.run_intake(gamepad1, telemetry); //intake
 
             telemetry.update();
         }
