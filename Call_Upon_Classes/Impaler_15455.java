@@ -16,7 +16,7 @@ public class Impaler_15455 {
     }
 
     public void control_impaler (Gamepad gamepad) {
-        boolean up = gamepad.y;
+        boolean up = gamepad.b;
         boolean down = gamepad.a;
 
         if(up) {
