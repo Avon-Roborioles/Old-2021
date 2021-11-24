@@ -27,6 +27,6 @@ public class Impaler_15455 {
     }
 
     public void getTelemetry() {
-
+        telemetry.addData("impaler position", impaler.getPosition());
     }
 }
