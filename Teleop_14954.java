@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp
 
-public class Teleop_14954_OneDriver extends LinearOpMode {
+public class Teleop_14954 extends LinearOpMode {
 
     //objects for each function of the robot
     private final org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp drivingMotors = new org.firstinspires.ftc.teamcode.Mecanum_Methods_TeleOp(false);
