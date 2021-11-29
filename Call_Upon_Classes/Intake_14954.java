@@ -13,10 +13,10 @@ public class Intake_14954 {
     public void init_intake(HardwareMap map, String name) { intake = map.get(DcMotor.class, name); }
 
 
-    public void run_intake(Gamepad gamepad1, Telemetry telemetry) {
+    public void run_intake(Gamepad gd, Telemetry telemetry) {
 
-        boolean lbumper = gamepad1.left_bumper;
-        boolean rbumper = gamepad1.right_bumper;
+        boolean lbumper = gd.left_bumper;
+        boolean rbumper = gd.right_bumper;
 
         if (lbumper) {
            speed = 0.75;
