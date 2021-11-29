@@ -21,7 +21,7 @@ public class Intake_15455{
     public void run_intake(Gamepad gamepad1, Telemetry telemetry) {
 
         boolean in = gamepad1.a;
-        boolean out = gamepad1.y;
+        boolean out = gamepad1.b;
 
         if (in) {
             speed = -1;

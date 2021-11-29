@@ -27,7 +27,7 @@ public class Carousel_Call{
     public void run_carousel_loop(Gamepad gamepad1, Telemetry telemetry) {
         //back-pedals a tiny bit once motor stops running
         //updates the final speed it reached from increments to display
-        if(carouselMovingForwards && !gamepad1.x) {
+        if(carouselMovingForwards && !gamepad1.y) {
             displayFinalSpeed = carouselIncrSpeed;
             carouselIncrSpeed = carouselStartSpeed;
             carousel.setPower(-0.3);
@@ -37,7 +37,7 @@ public class Carousel_Call{
             }
             carouselMovingForwards = false;
         }
-        if (carouselMovingBackwards && !gamepad1.b) {
+        if (carouselMovingBackwards && !gamepad1.x) {
             displayFinalSpeed = carouselDcrSpeed;
             carouselDcrSpeed = -1 * carouselStartSpeed;
             carousel.setPower(0.3);
@@ -54,14 +54,14 @@ public class Carousel_Call{
         //increases pace while pressed
         if(gamepad1.x && gamepad1.b) {
             carousel.setPower(0); //why have you done this
-        } else if (gamepad1.x) {
+        } else if (gamepad1.y) {
             carousel.setPower(carouselIncrSpeed);
             if(carouselIncrSpeed < .6) {
                 carouselIncrSpeed += incrAmt;
             }
             carouselMovingForwards = true;
             carouselMovingBackwards = false;
-        } else if (gamepad1.b) {
+        } else if (gamepad1.x) {
             carousel.setPower(carouselDcrSpeed);
             if (carouselDcrSpeed > -.6) {
                 carouselDcrSpeed -= incrAmt;
@@ -75,15 +75,26 @@ public class Carousel_Call{
         get_telemetry(telemetry);
     }
 
-//    public void run_carousel_auto (Telemetry telemetry) {
-//        carousel.setPower(carouselIncrSpeed);
-//        carouselIncrSpeed+= incrAmt;
-//
-//        get_telemetry(telemetry);
-//    }
+    public void run_carousel_auto (Telemetry telemetry, boolean red) {
+        int speed=1;
+        if (red) {
+          speed=-1;
+        }
+        for (int i=0; i<750; i++) {
+            carousel.setPower(carouselIncrSpeed*speed);
+
+            get_telemetry(telemetry);
+
+        }
+        displayFinalSpeed = carouselIncrSpeed;
+        get_telemetry(telemetry);
+        carousel.setPower(0);
+
+
+    }
 //
 //    public void stop_carousel_auto (Telemetry telemetry) {
-//        displayFinalSpeed = carouselIncrSpeed;
+
 //        carousel.setPower(-0.3);
 //        get_telemetry(telemetry);
 //        try {

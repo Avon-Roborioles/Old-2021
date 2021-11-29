@@ -11,12 +11,29 @@ public abstract class Auto_Base extends LinearOpMode {
     protected org.firstinspires.ftc.teamcode.Intake_15455 intake = new org.firstinspires.ftc.teamcode.Intake_15455();
 
     protected int inchToTicks = 91;
+    protected int scorePosition;
 
-
-    public void init_classes() {
+    public void init_classes(boolean red_alliance) {
         auto_motors.init_auto_drive_motors(hardwareMap, telemetry);
         auto_carousel.init_carousel(hardwareMap, "carousel", false);
         arm.init_arm(hardwareMap, "arm");
         intake.init_intake(hardwareMap, "intake");
+        distance_sensor.initDistance(hardwareMap, telemetry, red_alliance);
+    }
+    public void sense_barcode (){
+        scorePosition = 3; //furthest to the right, won't be changed if it doesn't see 1 or 2
+
+        if(distance_sensor.checkSeesSomething()) {
+            scorePosition = 2;
+        }
+        auto_motors.goToSpot(inchToTicks * -8, 1);
+
+        if(distance_sensor.checkSeesSomething()) {
+            scorePosition = 1;
+        }
+
+        telemetry.addData("Final Scoring Position Found: ", scorePosition);
+        telemetry.update();
+        //done sensing barcode :)
     }
 }

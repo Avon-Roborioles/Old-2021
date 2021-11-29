@@ -12,7 +12,7 @@ public class Auto_Red_Left_14 extends org.firstinspires.ftc.teamcode.Auto_Base {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        this.init_classes();
+        this.init_classes(true);
         double auto_run_count = 0;
 
         waitForStart();

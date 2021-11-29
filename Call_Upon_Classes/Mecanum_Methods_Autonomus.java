@@ -109,14 +109,14 @@ public class Mecanum_Methods_Autonomus {
         while (isBusy()){}
     }
 
-    public void strafeRight (double power, int inches) {
+    public void strafeLeft(double power, int inches) {
         //107 ticks= 1 inch
         inches*=107;
         setRelativeTargetIndividual(-inches, inches,inches,-inches);
         setPowerIndividual(-power, power, -power, power);
         while (isBusy()){}
     }
-    public void strafeLeft (double power, int inches) {
+    public void strafeRight(double power, int inches) {
         inches*=107;
         setRelativeTargetIndividual(inches,-inches,-inches,inches);
         setPowerIndividual(power, -power, power, -power);
@@ -126,8 +126,17 @@ public class Mecanum_Methods_Autonomus {
 
     public boolean isBusy (){
 //        getTelemetry(telemetry);
+        int totalBusy=0;
+        if (fl.isBusy())
+            totalBusy++;
+        if (bl.isBusy())
+            totalBusy++;
+        if (br.isBusy())
+            totalBusy++;
+        if (fr.isBusy())
+            totalBusy++;
 
-        if (fl.isBusy()||fr.isBusy()||br.isBusy()||bl.isBusy())
+        if (totalBusy>=3)
             return true;
         else
             return false;
@@ -135,12 +144,7 @@ public class Mecanum_Methods_Autonomus {
 
 
 
-    public void waitForDone(Telemetry telemetry) {
-        while(fl.isBusy()) {
-            getTelemetry(telemetry);
-            telemetry.update();
-        }
-    }
+
 
     public void getTelemetry (Telemetry telemetry){
         telemetry.addData("fl encoder value: ",fl.getCurrentPosition());

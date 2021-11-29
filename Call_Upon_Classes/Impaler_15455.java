@@ -20,10 +20,12 @@ public class Impaler_15455 {
         boolean down = gamepad.a;
 
         if(up) {
-            impaler.setPosition(90); //?????
+            impaler.setPosition(20); //?????
         } else if (down) {
-            impaler.setPosition(0);
+            impaler.setPosition(60);
         }
+
+        getTelemetry();
     }
 
     public void getTelemetry() {

@@ -15,7 +15,7 @@ public class Teleop_15455 extends LinearOpMode {
     private org.firstinspires.ftc.teamcode.Turntable_15455 turntable = new org.firstinspires.ftc.teamcode.Turntable_15455();
     private org.firstinspires.ftc.teamcode.Arm_15455 arm = new org.firstinspires.ftc.teamcode.Arm_15455();
     private org.firstinspires.ftc.teamcode.Intake_15455 intake = new org.firstinspires.ftc.teamcode.Intake_15455();
-
+    private org.firstinspires.ftc.teamcode.Impaler_15455 impaler = new org.firstinspires.ftc.teamcode.Impaler_15455();
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -24,6 +24,7 @@ public class Teleop_15455 extends LinearOpMode {
         turntable.init_turntable(hardwareMap, "turntable");
         intake.init_intake(hardwareMap, "intake");
         arm.init_arm(hardwareMap, "arm");
+        impaler.init_impaler(hardwareMap,telemetry);
 
         waitForStart();
 
@@ -33,6 +34,7 @@ public class Teleop_15455 extends LinearOpMode {
             turntable.run_turntable(gamepad2, telemetry);
             intake.run_intake(gamepad2, telemetry);
             arm.run_arm(gamepad2, telemetry);
+            impaler.control_impaler(gamepad1);
 
 
             telemetry.update();
