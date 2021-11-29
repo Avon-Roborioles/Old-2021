@@ -16,10 +16,10 @@ public class Arm_14954 {
 
     public void init_armlift (HardwareMap map, String name) { armlift  = map.get(DcMotor.class, name); }
 
-    public void run_arm(Gamepad gamepad1, Telemetry telemetry) {
+    public void run_arm(Gamepad gp, Telemetry telemetry) {
 
-        double ltrigger = gamepad1.left_trigger;
-        double rtrigger = gamepad1.right_trigger;
+        double ltrigger = gp.left_trigger;
+        double rtrigger = gp.right_trigger;
         
         if (ltrigger > 0) {
             speed = 1;
