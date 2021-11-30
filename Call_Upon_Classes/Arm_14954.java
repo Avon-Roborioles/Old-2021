@@ -11,10 +11,14 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Arm_14954 {
 
-    private DcMotor armlift = null;
+    private DcMotor armlift1 = null;
+    private DcMotor armlift2 = null;
     private double speed;
 
-    public void init_armlift (HardwareMap map, String name) { armlift  = map.get(DcMotor.class, name); }
+    public void init_armlift (HardwareMap map, String name1, String name2) {
+        armlift1  = map.get(DcMotor.class, name1);
+        armlift2  = map.get(DcMotor.class, name2);
+    }
 
     public void run_arm(Gamepad gp, Telemetry telemetry) {
 
@@ -22,14 +26,15 @@ public class Arm_14954 {
         double rtrigger = gp.right_trigger;
         
         if (ltrigger > 0) {
-            speed = 1;
+            speed = 0.5;
         } else if (rtrigger > 0 ) {
-            speed = -0.75;
+            speed = -0.5;
         } else {
             speed = 0;
         }
 
-        armlift.setPower(speed);
+        armlift1.setPower(speed);
+        armlift2.setPower(speed);
 
         get_telemetry(telemetry);
     }
