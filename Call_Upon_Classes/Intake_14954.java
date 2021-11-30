@@ -10,7 +10,9 @@ public class Intake_14954 {
     private DcMotor intake = null;
     private double speed = 0;
 
-    public void init_intake(HardwareMap map, String name) { intake = map.get(DcMotor.class, name); }
+    public void init_intake(HardwareMap map, String name) {
+        intake = map.get(DcMotor.class, name);
+    }
 
 
     public void run_intake(Gamepad gd, Telemetry telemetry) {

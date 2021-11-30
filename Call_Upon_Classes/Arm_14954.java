@@ -40,7 +40,7 @@ public class Arm_14954 {
     }
 
     public void get_telemetry (Telemetry telemetry) {
-        telemetry.addData("Arm Speed", speed);
+        telemetry.addData("Armlift Speed", speed);
     }
 
 }

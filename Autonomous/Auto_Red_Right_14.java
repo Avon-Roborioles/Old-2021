@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @Autonomous
 @Disabled
 
-public class Auto_Red_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base {
+public class Auto_Red_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base_14 {
 
     @Override
     public void runOpMode() throws InterruptedException {
