@@ -26,9 +26,9 @@ public class Arm_14954 {
         double rtrigger = gp.right_trigger;
         
         if (ltrigger > 0) {
-            speed = 0.5;
+            speed = 1;
         } else if (rtrigger > 0 ) {
-            speed = -0.5;
+            speed = -1;
         } else {
             speed = 0;
         }
