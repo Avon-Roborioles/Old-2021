@@ -19,6 +19,16 @@ public class Arm_14954 {
         armlift1  = map.get(DcMotor.class, name1);
         armlift2  = map.get(DcMotor.class, name2);
     }
+    
+      //Test method for normal armlift operation + Passive motor position holder  
+      public void init_armliftv2 (HardwareMap map, String name1, String name2) {
+        armlift1  = map.get(DcMotor.class, name1);
+        armlift2  = map.get(DcMotor.class, name2);
+          
+        armlift1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armlift2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       
+    }
 
     public void run_arm(Gamepad gp, Telemetry telemetry) {
 
@@ -38,7 +48,30 @@ public class Arm_14954 {
 
         get_telemetry(telemetry);
     }
+    
+    //Test method for normal armlift operation + Passive motor position holder  
+    public void run_armv2 (Gamepad gp, Telemetry telemetry) {
+        
+        double ltrigger = gp.left_trigger;
+        double rtrigger = gp.right_trigger;
+        
+        if (ltrigger > 0) {
+            speed = 1;
+        } else if (rtrigger > 0 ) {
+            speed = -1;
+        } else {
+            speed = 0;
+        }
 
+        armlift1.setPower(speed);
+        armlift2.setPower(speed);
+
+        get_telemetry(telemetry);
+    }   
+
+    
+    
+    
     public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("Armlift Speed", speed);
     }
