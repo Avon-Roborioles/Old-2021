@@ -44,13 +44,13 @@ public class Arm_15455{
     }
 
     public void autoArmUp(int pos){
-        if (pos==1) {arm.setTargetPosition((int) (30*22.7));}
+        if (pos==1) {arm.setTargetPosition((int) (40*22.7));}
         if (pos==2) {arm.setTargetPosition((int) (60*22.7));}
         if (pos>=3) {arm.setTargetPosition((int) (85*22.7));}
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setPower(1);
         while (arm.isBusy()){}
-
+        arm.setPower(0);
 
     }
 

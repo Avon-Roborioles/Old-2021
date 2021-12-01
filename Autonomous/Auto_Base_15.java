@@ -9,7 +9,7 @@ public abstract class Auto_Base_15 extends LinearOpMode {
     protected org.firstinspires.ftc.teamcode.Distance_Sensor distance_sensor = new org.firstinspires.ftc.teamcode.Distance_Sensor();
     protected org.firstinspires.ftc.teamcode.Arm_15455 arm = new org.firstinspires.ftc.teamcode.Arm_15455();
     protected org.firstinspires.ftc.teamcode.Intake_15455 intake = new org.firstinspires.ftc.teamcode.Intake_15455();
-
+    protected org.firstinspires.ftc.teamcode.Turntable_15455 turntable = new org.firstinspires.ftc.teamcode.Turntable_15455();
 
     protected int inchToTicks = 91;
     protected int scorePosition;
@@ -20,6 +20,7 @@ public abstract class Auto_Base_15 extends LinearOpMode {
         arm.init_arm(hardwareMap, "arm");
         intake.init_intake(hardwareMap, "intake");
         distance_sensor.initDistance(hardwareMap, telemetry, red_alliance);
+        turntable.init_turntable(hardwareMap, telemetry, "turntable");
     }
     public void sense_barcode (){
         scorePosition = 3; //furthest to the right, won't be changed if it doesn't see 1 or 2
@@ -34,7 +35,7 @@ public abstract class Auto_Base_15 extends LinearOpMode {
         }
 
         telemetry.addData("Final Scoring Position Found: ", scorePosition);
-        telemetry.update();
+//        telemetry.update();
         //done sensing barcode :)
     }
 }

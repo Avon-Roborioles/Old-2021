@@ -12,10 +12,12 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Turntable_15455 {
     private CRServo turntable = null;
     private DcMotor TTEncoder = null;
+    private Telemetry telemetry = null;
 
-    public void init_turntable(HardwareMap map, String name) {
+    public void init_turntable(HardwareMap map, Telemetry telemetry, String name) {
         turntable = map.get(CRServo.class, name);
         TTEncoder = map.get(DcMotor.class, name);
+        this.telemetry = telemetry;
     }
 
     public void run_turntable(Gamepad gamepad1, Telemetry telemetry) {
@@ -34,16 +36,18 @@ public class Turntable_15455 {
     }
 
     public void turntable_auto (int deg, double power) {
+        turntable.setPower(power * .88);
         while (TTEncoder.getCurrentPosition()<deg*(8000/360)) {
-            turntable.setPower(power * .88);
+            this.get_telemetry(telemetry);
         }
+        turntable.setPower(0);
     }
 
 
 
     public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("turntable power", turntable.getPower());
-        telemetry.addData("turntable pos", TTEncoder.getCurrentPosition());
+        telemetry.addData("turntable current pos", TTEncoder.getCurrentPosition());
     }
 
 

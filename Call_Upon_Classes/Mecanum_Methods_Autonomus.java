@@ -108,6 +108,16 @@ public class Mecanum_Methods_Autonomus {
         setPowerIndividual(power,-power,-power,power);
         while (isBusy()){}
     }
+    public void turn45left (double power){
+        setRelativeTargetIndividual((int) Math.floor(-1440*1.2*.5),(int) Math.floor(-1440*1.2*.5),(int) Math.floor(1440*1.2*.5), (int) Math.floor(1440*1.2*.5));
+        setPowerIndividual(-power,power,power,-power);
+        while (isBusy()){}
+    }
+    public void turn45right (double power){
+        setRelativeTargetIndividual((int) Math.floor(1440*1.2*.5),(int) Math.floor(1440*1.2*.5),(int) Math.floor(-1440*1.2*.5), (int) Math.floor(-1440*1.2*.5));
+        setPowerIndividual(power,-power,-power,power);
+        while (isBusy()){}
+    }
 
     public void strafeLeft(double power, int inches) {
         //107 ticks= 1 inch

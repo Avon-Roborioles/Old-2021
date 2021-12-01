@@ -21,7 +21,7 @@ public class Teleop_15455 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         drive_motors.init_drive_motors(hardwareMap);
         carousel.init_carousel(hardwareMap, "carousel", true);
-        turntable.init_turntable(hardwareMap, "turntable");
+        turntable.init_turntable(hardwareMap, telemetry, "turntable");
         intake.init_intake(hardwareMap, "intake");
         arm.init_arm(hardwareMap, "arm");
         impaler.init_impaler(hardwareMap,telemetry);
