@@ -12,12 +12,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Turntable_15455 {
     private CRServo turntable = null;
     private DcMotor TTEncoder = null;
-    private Telemetry telemetry = null;
 
-    public void init_turntable(HardwareMap map, Telemetry telemetry, String name) {
+    public void init_turntable(HardwareMap map, String name) {
         turntable = map.get(CRServo.class, name);
         TTEncoder = map.get(DcMotor.class, name);
-        this.telemetry = telemetry;
     }
 
     public void run_turntable(Gamepad gamepad1, Telemetry telemetry) {
@@ -25,9 +23,9 @@ public class Turntable_15455 {
         double turn_left = gamepad1.left_trigger;
 
         if (turn_left>0&&TTEncoder.getCurrentPosition()>-8000*5) {
-            turntable.setPower( -turn_left*.88);
+            turntable.setPower( -turn_left*.75);
         } else if (turn_right>0&&TTEncoder.getCurrentPosition()<8000*5) {
-            turntable.setPower( turn_right*.88);
+            turntable.setPower( turn_right*.75);
         } else {
             turntable.setPower(0);
         }
@@ -36,9 +34,28 @@ public class Turntable_15455 {
     }
 
     public void turntable_auto (int deg, double power) {
-        turntable.setPower(power * .88);
-        while (TTEncoder.getCurrentPosition()<deg*(8000/360)) {
-            this.get_telemetry(telemetry);
+        int start_pos = TTEncoder.getCurrentPosition();
+        if (deg>0) {
+            while (TTEncoder.getCurrentPosition() - start_pos < deg * (8000 / 360)) {
+                turntable.setPower(power * .88);
+            }
+            turntable.setPower(-.75);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            while (TTEncoder.getCurrentPosition() - start_pos > deg * (8000 / 360)) {
+                turntable.setPower(power * .88);
+            }
+            turntable.setPower(.75);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
         turntable.setPower(0);
     }
@@ -47,7 +64,7 @@ public class Turntable_15455 {
 
     public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("turntable power", turntable.getPower());
-        telemetry.addData("turntable current pos", TTEncoder.getCurrentPosition());
+        telemetry.addData("turntable pos", TTEncoder.getCurrentPosition());
     }
 
 

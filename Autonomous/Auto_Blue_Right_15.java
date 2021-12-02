@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous
-//@Disabled?????
+
 
 public class Auto_Blue_Right_15 extends org.firstinspires.ftc.teamcode.Auto_Base_15 {
 
@@ -14,19 +14,26 @@ public class Auto_Blue_Right_15 extends org.firstinspires.ftc.teamcode.Auto_Base
     public void runOpMode() throws InterruptedException {
         this.init_classes(false);
 
+
         waitForStart();
         this.sense_barcode();
 
-        //move into position
 
+        auto_motors.strafeRight(1,5);
+        auto_motors.goToSpot((int) (-inchToTicks*11.5), 1);
         auto_carousel.run_carousel_auto(telemetry,false);
+        auto_motors.strafeRight(1, 10);
+        auto_motors.goToSpot(-inchToTicks*7,1);
+        auto_motors.strafeRight(1, 15);
 
 
-//        this.auto_motors.strafeRight(1,25);
+        while (opModeIsActive()) {}
+
+
+        }
 
 
 
 
-        Thread.sleep(5000);
     }
-}
+

@@ -18,6 +18,23 @@ public class Auto_Blue_Left_15 extends org.firstinspires.ftc.teamcode.Auto_Base_
         this.sense_barcode();
 
 
-        Thread.sleep(5000);
+        auto_motors.goToSpot(inchToTicks*40, 1);
+        arm.autoArmUp(3);
+        turntable.turntable_auto(90, .75);
+
+        //go to actual level
+        arm.autoArmUp(this.scorePosition);
+        auto_motors.strafeRight(1, 7); //make this dependent a bit on which level?
+
+        intake.autoEject();
+        turntable.turntable_auto(-90,-.75);
+        arm.autoArmDown();
+        auto_motors.turn90left(.75);
+        auto_motors.goToSpot(30*inchToTicks, 1);
+
+
+
+        while (opModeIsActive()) {}
+
     }
 }

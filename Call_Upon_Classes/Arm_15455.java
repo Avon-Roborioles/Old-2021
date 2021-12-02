@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.LED;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -13,25 +14,35 @@ import java.util.Base64;
 
 public class Arm_15455{
     private DcMotor arm = null;
+    private LED led1 = null;
+    private LED led2 = null;
     private double speed;
 
     public void init_arm(HardwareMap map, String name) {
         arm  = map.get(DcMotor.class, name);
-
+    }
+    public void init_led(HardwareMap map, String name1, String name2){
+        led1 = map.get(LED.class, name1);
+        led2 = map.get(LED.class, name2);
     }
 
     public void run_arm(Gamepad gamepad1, Telemetry telemetry) {
         double pos = arm.getCurrentPosition()/22.7%360;
         boolean dpad_up = gamepad1.dpad_up;
         boolean dpad_down = gamepad1.dpad_down;
+        double x = 0;
+        if (gamepad1.back)
+            x-=.01;
 
-        if (dpad_up && pos<=85) {
+        if (dpad_up && pos<=87.5) {
             speed = 1;
-        } else if (dpad_down&&pos>=1) {
+        } else if (dpad_down&&pos>=1-x) {
             speed = -1;
         } else {
             speed = 0;
         }
+
+
 
         arm.setPower(speed);
 
@@ -46,7 +57,7 @@ public class Arm_15455{
     public void autoArmUp(int pos){
         if (pos==1) {arm.setTargetPosition((int) (40*22.7));}
         if (pos==2) {arm.setTargetPosition((int) (60*22.7));}
-        if (pos>=3) {arm.setTargetPosition((int) (85*22.7));}
+        if (pos>=3) {arm.setTargetPosition((int) (87.5*22.7));}
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setPower(1);
         while (arm.isBusy()){}
@@ -55,9 +66,16 @@ public class Arm_15455{
     }
 
     public void autoArmDown (){
-        arm.setTargetPosition(5);
+        arm.setTargetPosition(50);
         arm.setPower(-1);
-        while (arm.isBusy()){}
+        while (arm.getCurrentPosition()>40){}
+        arm.setPower(0);
+    }
+    public void leds () {
+        led1.enableLight(true);
+
+
+
     }
 
 
