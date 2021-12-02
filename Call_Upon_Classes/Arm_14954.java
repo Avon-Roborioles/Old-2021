@@ -32,6 +32,11 @@ public class Arm_14954 {
         armlift1  = map.get(DcMotor.class, name1);
         armlift2  = map.get(DcMotor.class, name2);
         
+          
+        //Don't know if this is needed; will test soon
+        armlift1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        armlift2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);  
+          
         //sets current motor encoder values to zero (resets)
         armlift1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armlift2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -86,14 +91,14 @@ public class Arm_14954 {
         //moves armlift up
         if (ltrigger > 0) {
             
-            armlift1.setTargetPosition( getCurrentPosition() + 1 ); //change number if needed
-            armlift2.setTargetPosition( getCurrentPosition() + 1 ); //change number if needed
+            armlift1.setTargetPosition( getCurrentPosition() + 5 ); //change number if needed
+            armlift2.setTargetPosition( getCurrentPosition() + 5 ); //change number if needed
          
         //moves armlift down
         } else if (rtrigger > 0 ) {
             
-            armlift1.setTargetPosition( getCurrentPosition() - 1 ); //change number if needed
-            armlift2.setTargetPosition( getCurrentPosition() - 1 ); //change number if needed
+            armlift1.setTargetPosition( getCurrentPosition() - 5 ); //change number if needed
+            armlift2.setTargetPosition( getCurrentPosition() - 5 ); //change number if needed
             
         }
 
