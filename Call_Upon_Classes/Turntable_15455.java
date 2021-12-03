@@ -12,8 +12,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Turntable_15455 {
     private CRServo turntable = null;
     private DcMotor TTEncoder = null;
-
-    public void init_turntable(HardwareMap map, String name) {
+    private Telemetry telemetry = null;
+    public void init_turntable(HardwareMap map, Telemetry telemetry, String name) {
         turntable = map.get(CRServo.class, name);
         TTEncoder = map.get(DcMotor.class, name);
     }

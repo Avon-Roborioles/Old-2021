@@ -80,7 +80,7 @@ public class Carousel_Call{
         if (red) {
           speed=-1;
         }
-        for (int i=0; i<750; i++) {
+        for (int i=0; i<1500; i++) {
             carousel.setPower(carouselIncrSpeed*speed);
 
             get_telemetry(telemetry);

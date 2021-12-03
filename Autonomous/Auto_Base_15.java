@@ -20,7 +20,7 @@ public abstract class Auto_Base_15 extends LinearOpMode {
         arm.init_arm(hardwareMap, "arm");
         intake.init_intake(hardwareMap, "intake");
         distance_sensor.initDistance(hardwareMap, telemetry, red_alliance);
-        turntable.init_turntable(hardwareMap, telemetry, "turntable");
+//        turntable.init_turntable(hardwareMap, telemetry, "turntable");
     }
     public void sense_barcode (){
         scorePosition = 3; //furthest to the right, won't be changed if it doesn't see 1 or 2
