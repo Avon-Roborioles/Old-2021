@@ -2,34 +2,36 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
 
 @Autonomous
-@Disabled
 
 public class Auto_Blue_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base_14 {
 
-
     @Override
     public void runOpMode() throws InterruptedException {
-        this.init_classes(false);
-        double auto_run_count = 0;
+
+        this.init_classes(true);
 
         waitForStart();
 
-        while(opModeIsActive()) {
-//            if(auto_run_count < 10000) { //not sure how many ticks we want, or if we should do it another way
-//                auto_carousel.run_carousel_auto(telemetry);
-//                auto_run_count++;
-//            } else {
-//                auto_carousel.stop_carousel_auto(telemetry);
-//            }
+        // this.sense_barcode();
 
-        }
+        auto_motors.strafeRight(0.8,6);
+        auto_motors.goToSpot((int) (-inchToTicks*25), .75);
 
+        auto_carousel.run_carousel_auto(telemetry,false);
 
+        auto_motors.strafeRight(.75, 20);
+        auto_motors.goToSpot((int) (-inchToTicks*6), .75);
 
 
+
+
+
+
+
+
+        Thread.sleep(10000);
     }
 }

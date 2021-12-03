@@ -3,30 +3,19 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 @Autonomous
-@Disabled
+//@Disabled
 public class Auto_Blue_Left_14 extends org.firstinspires.ftc.teamcode.Auto_Base_14 {
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-        init_classes(false);
+        this.init_classes(false);
 
         waitForStart();
-        this.sense_barcode();
 
+        auto_motors.goToSpot((int) (inchToTicks*36), .75);
 
-        //move X inches to carousel
-        //turn somehow to be on the far end of carousel
-        //run carousel
-
-        Thread.sleep(5000);
+        Thread.sleep( 10000);
     }
-}
 
-//            if(auto_run_count < 10000) { //not sure how many ticks we want, or if we should do it another way
-//                auto_carousel.run_carousel_auto(telemetry);
-//                auto_run_count++;
-//            } else {
-//                auto_carousel.stop_carousel_auto(telemetry);
-//            }
-//        double auto_run_count = 0;
+}
