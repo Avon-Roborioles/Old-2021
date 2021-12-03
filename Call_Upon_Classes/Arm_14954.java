@@ -91,14 +91,14 @@ public class Arm_14954 {
         //moves armlift up
         if (ltrigger > 0) {
             
-            armlift1.setTargetPosition( getCurrentPosition() + 5 ); //change number if needed
-            armlift2.setTargetPosition( getCurrentPosition() + 5 ); //change number if needed
+//            armlift1.setTargetPosition( getCurrentPosition() + 5 ); //change number if needed
+//            armlift2.setTargetPosition( getCurrentPosition() + 5 ); //change number if needed
          
         //moves armlift down
         } else if (rtrigger > 0 ) {
             
-            armlift1.setTargetPosition( getCurrentPosition() - 5 ); //change number if needed
-            armlift2.setTargetPosition( getCurrentPosition() - 5 ); //change number if needed
+//            armlift1.setTargetPosition( getCurrentPosition() - 5 ); //change number if needed
+//            armlift2.setTargetPosition( getCurrentPosition() - 5 ); //change number if needed
             
         }
 

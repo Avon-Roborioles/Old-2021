@@ -20,9 +20,9 @@ public abstract class Auto_Base_15 extends LinearOpMode {
         arm.init_arm(hardwareMap, "arm");
         intake.init_intake(hardwareMap, "intake");
         distance_sensor.initDistance(hardwareMap, telemetry, red_alliance);
-        turntable.init_turntable(hardwareMap, telemetry, "turntable");
+        turntable.init_turntable(hardwareMap, "turntable");
     }
-    public void sense_barcode (){
+    public void sense_barcode_red (){
         scorePosition = 3; //furthest to the right, won't be changed if it doesn't see 1 or 2
 
         if(distance_sensor.checkSeesSomething()) {
@@ -32,6 +32,23 @@ public abstract class Auto_Base_15 extends LinearOpMode {
 
         if(distance_sensor.checkSeesSomething()) {
             scorePosition = 1;
+        }
+
+        telemetry.addData("Final Scoring Position Found: ", scorePosition);
+//        telemetry.update();
+        //done sensing barcode :)
+    }
+
+    public void sense_barcode_blue (){
+        scorePosition = 1; //furthest to the right, won't be changed if it doesn't see 1 or 2
+
+        if(distance_sensor.checkSeesSomething()) {
+            scorePosition = 2;
+        }
+        auto_motors.goToSpot(inchToTicks * -8, 1);
+
+        if(distance_sensor.checkSeesSomething()) {
+            scorePosition = 3;
         }
 
         telemetry.addData("Final Scoring Position Found: ", scorePosition);

@@ -119,16 +119,16 @@ public class Mecanum_Methods_Autonomus {
         while (isBusy()){}
     }
 
-    public void strafeLeft(double power, int inches) {
+    public void strafeLeft(double power, double inches) {
         //107 ticks= 1 inch
         inches*=107;
-        setRelativeTargetIndividual(-inches, inches,inches,-inches);
+        setRelativeTargetIndividual((int)-inches,(int) inches,(int)inches,(int)-inches);
         setPowerIndividual(-power, power, -power, power);
         while (isBusy()){}
     }
-    public void strafeRight(double power, int inches) {
+    public void strafeRight(double power, double inches) {
         inches*=107;
-        setRelativeTargetIndividual(inches,-inches,-inches,inches);
+        setRelativeTargetIndividual((int)inches,(int)-inches,(int)-inches,(int)inches);
         setPowerIndividual(power, -power, power, -power);
         while (isBusy()){}
     }

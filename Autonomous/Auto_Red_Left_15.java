@@ -15,7 +15,7 @@ public class Auto_Red_Left_15 extends org.firstinspires.ftc.teamcode.Auto_Base_1
 
 
         waitForStart();
-        this.sense_barcode();
+        this.sense_barcode_red();
 
         auto_motors.strafeLeft(1,4);
         auto_motors.goToSpot((int) (-inchToTicks*12.5), 1);

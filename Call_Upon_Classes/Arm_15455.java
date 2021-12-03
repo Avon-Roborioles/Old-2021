@@ -30,13 +30,11 @@ public class Arm_15455{
         double pos = arm.getCurrentPosition()/22.7%360;
         boolean dpad_up = gamepad1.dpad_up;
         boolean dpad_down = gamepad1.dpad_down;
-        double x = 0;
-        if (gamepad1.back)
-            x-=.01;
 
-        if (dpad_up && pos<=87.5) {
+
+        if (dpad_up && (pos<=87.5 || gamepad1.back)) {
             speed = 1;
-        } else if (dpad_down&&pos>=1-x) {
+        } else if (dpad_down&& (pos>=1 || gamepad1.back)) {
             speed = -1;
         } else {
             speed = 0;
@@ -56,10 +54,10 @@ public class Arm_15455{
 
     public void autoArmUp(int pos){
         if (pos==1) {arm.setTargetPosition((int) (40*22.7));}
-        if (pos==2) {arm.setTargetPosition((int) (60*22.7));}
+        if (pos==2) {arm.setTargetPosition((int) (65*22.7));}
         if (pos>=3) {arm.setTargetPosition((int) (87.5*22.7));}
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setPower(1);
+        arm.setPower(.75);
         while (arm.isBusy()){}
         arm.setPower(0);
 
@@ -68,8 +66,12 @@ public class Arm_15455{
     public void autoArmDown (){
         arm.setTargetPosition(50);
         arm.setPower(-1);
-        while (arm.getCurrentPosition()>40){}
+        while (arm.getCurrentPosition()>40){
+            if (arm.getCurrentPosition()>85*107)
+                break;
+        }
         arm.setPower(0);
+
     }
     public void leds () {
         led1.enableLight(true);

@@ -16,7 +16,7 @@ public class Auto_Blue_Right_15 extends org.firstinspires.ftc.teamcode.Auto_Base
 
 
         waitForStart();
-        this.sense_barcode();
+        this.sense_barcode_blue();
 
 
         auto_motors.strafeRight(1,5);

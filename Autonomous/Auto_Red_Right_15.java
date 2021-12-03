@@ -16,22 +16,43 @@ public class Auto_Red_Right_15 extends org.firstinspires.ftc.teamcode.Auto_Base_
 
 
         waitForStart();
+        this.sense_barcode_red();
 
 
-        auto_motors.goToSpot(inchToTicks*40, 1);
-        arm.autoArmUp(3);
-        turntable.turntable_auto(-90, -.75);
+        auto_motors.goToSpot(-inchToTicks*15, 1);
+        auto_motors.strafeLeft(1, 18);
+        arm.autoArmUp(2);
+        turntable.turntable_auto(-80, -.5);
 
         arm.autoArmUp(scorePosition);
-        auto_motors.strafeLeft(1, 7);
 
+        if(scorePosition==1){
+            auto_motors.strafeLeft(.75,3.5);
+        }else if (scorePosition==2) {
+            auto_motors.strafeLeft(.75,4);
+        }else{
+            auto_motors.strafeLeft(.75, 7);
+        }
         intake.autoEject();
-        turntable.turntable_auto(90,.75);
+        if(scorePosition==1){
+            auto_motors.strafeRight(.75,3.5);
+        }else if (scorePosition==2) {
+            auto_motors.strafeRight(.75,4);
+        }else{
+            auto_motors.strafeRight(.75, 7);
+        }
+        arm.autoArmUp(2);
+        turntable.turntable_auto(85, .5);
         arm.autoArmDown();
-        auto_motors.turn90right(.75);
-        auto_motors.goToSpot(30*inchToTicks, 1);
+        auto_motors.strafeRight(1,19);
+        auto_motors.goToSpot(inchToTicks*55,1);
 
 
+
+
+
+
+        telemetry.update();
 
 
         while (opModeIsActive()) {}
