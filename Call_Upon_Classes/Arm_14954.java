@@ -31,10 +31,12 @@ public class Arm_14954 {
         //names motors for configurations
         armlift1  = map.get(DcMotor.class, name1);
         armlift2  = map.get(DcMotor.class, name2);
-
-        //
-
-
+        
+          
+        //Don't know if this is needed; will test soon
+        armlift1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        armlift2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);  
+          
         //sets current motor encoder values to zero (resets)
         armlift1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armlift2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -56,15 +58,15 @@ public class Arm_14954 {
     
     
     
-    public void run_arm (Gamepad gp, Telemetry telemetry) {
+    public void run_arm(Gamepad gp, Telemetry telemetry) {
 
         double ltrigger = gp.left_trigger;
         double rtrigger = gp.right_trigger;
         
         if (ltrigger > 0) {
-            speed = 1;
+            speed = .6;
         } else if (rtrigger > 0 ) {
-            speed = -1;
+            speed = -.6;
         } else {
             speed = 0;
         }
@@ -83,21 +85,21 @@ public class Arm_14954 {
     //Test method for normal armlift operation + Passive motor position holder  
     public void run_armv2 (Gamepad gp, Telemetry telemetry) {
         
-        double ltrigger = gp.left_trigger;
-        double rtrigger = gp.right_trigger;
+        double ltrigger = gp.left_trigger*.5;
+        double rtrigger = gp.right_trigger*.5;
         
         //moves armlift up
         if (ltrigger > 0) {
-            
+
             armlift1.setTargetPosition( armlift1.getCurrentPosition() + 5 ); //change number if needed
-            armlift2.setTargetPosition( armlift2.getCurrentPosition() + 5 ); //change number if needed
-         
+            armlift2.setTargetPosition( armlift1.getCurrentPosition() + 5 ); //change number if needed
+
         //moves armlift down
         } else if (rtrigger > 0 ) {
-            
+
             armlift1.setTargetPosition( armlift1.getCurrentPosition() - 5 ); //change number if needed
-            armlift2.setTargetPosition( armlift2.getCurrentPosition() - 5 ); //change number if needed
-            
+            armlift2.setTargetPosition( armlift1.getCurrentPosition() - 5 ); //change number if needed
+
         }
 
         
