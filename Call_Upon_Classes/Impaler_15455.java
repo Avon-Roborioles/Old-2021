@@ -20,8 +20,10 @@ public class Impaler_15455 {
         boolean down = gamepad.a;
 
         if(up) {
-            impaler.setPosition(20); //?????
+            impaler.setDirection(Servo.Direction.REVERSE);
+            impaler.setPosition(1);
         } else if (down) {
+            impaler.setDirection(Servo.Direction.FORWARD);
             impaler.setPosition(60);
         }
 

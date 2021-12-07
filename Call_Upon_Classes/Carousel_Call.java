@@ -12,7 +12,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Carousel_Call{
     private DcMotor carousel = null;
     private double carouselStartSpeed = 0.37; //base speed
-    private double carouselIncrSpeed = carouselStartSpeed; //speed as carousel is running and increasing
+    private double carouselIncrSpeed = carouselStartSpeed+.05; //speed as carousel is running and increasing
     private double carouselDcrSpeed = -1 * carouselStartSpeed;
     private double displayFinalSpeed = 0; //for display
     
@@ -76,11 +76,11 @@ public class Carousel_Call{
     }
 
     public void run_carousel_auto (Telemetry telemetry, boolean red) {
-        int speed=1;
+        double speed=.5;
         if (red) {
-          speed=-1;
+          speed*=-1;
         }
-        for (int i=0; i<1500; i++) {
+        for (int i=0; i<2500; i++) {
             carousel.setPower(carouselIncrSpeed*speed);
 
             get_telemetry(telemetry);

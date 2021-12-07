@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Turntable_15455 {
@@ -23,11 +24,14 @@ public class Turntable_15455 {
         double turn_left = gamepad1.left_trigger;
 
         if (turn_left>0&&TTEncoder.getCurrentPosition()>-8000*5) {
-            turntable.setPower( -turn_left*.75);
+            //turntable.setPower( -turn_left*.75);
+            TTEncoder.setPower(-.05);
         } else if (turn_right>0&&TTEncoder.getCurrentPosition()<8000*5) {
-            turntable.setPower( turn_right*.75);
+//            turntable.setPower( turn_right*.75);
+            TTEncoder.setPower(.05);
         } else {
-            turntable.setPower(0);
+//            turntable.setPower(0);
+            TTEncoder.setPower(0);
         }
 
         get_telemetry(telemetry);
@@ -58,6 +62,28 @@ public class Turntable_15455 {
 
         }
         turntable.setPower(0);
+    }
+    public void arm_0 () {
+        if (TTEncoder.getCurrentPosition()>0){
+            while (TTEncoder.getCurrentPosition()>0)
+                turntable.setPower(-.75*.88);
+
+        }
+    }
+    public void turntable_test () {
+        TTEncoder.setPower(.5);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        TTEncoder.setPower(-.25/2);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        TTEncoder.setPower(0);
     }
 
 

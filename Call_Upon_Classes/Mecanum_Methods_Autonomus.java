@@ -146,7 +146,7 @@ public class Mecanum_Methods_Autonomus {
         if (fr.isBusy())
             totalBusy++;
 
-        if (totalBusy>=3)
+        if (totalBusy>=4)
             return true;
         else
             return false;
