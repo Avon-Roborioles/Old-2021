@@ -33,11 +33,7 @@ public class Arm_14954 {
         armlift1  = map.get(DcMotor.class, name1);
         armlift2  = map.get(DcMotor.class, name2);
         
-          
-        //Don't know if this is needed; will test soon
-        armlift1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        armlift2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);  
-          
+       
         //sets current motor encoder values to zero (resets)
         armlift1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armlift2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -49,9 +45,9 @@ public class Arm_14954 {
         armlift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armlift2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
        
-        //maximum power robot can use to move and adjust armlift
-        armlift1.setPower(1);
-        armlift2.setPower(1);
+        //maximum velocity robot can use to move and adjust armlift
+        armlift1.setVelocity(200);
+        armlift2.setVelocity(200);
     }
 
     
@@ -89,25 +85,32 @@ public class Arm_14954 {
         double ltrigger = gp.left_trigger;
         double rtrigger = gp.right_trigger;
         double r = 0;
+        
         if (ltrigger>0) {
             armlift1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             armlift2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            armlift1.setPower(speed);
-            armlift2.setPower(speed);
+            armlift1.setVelocity(200);
+            armlift2.setVelocity(200);
+            
             armlift1.setTargetPosition(armlift1.getCurrentPosition());
             armlift2.setTargetPosition(armlift2.getCurrentPosition());
+            
         } else if (rtrigger>0) {
             armlift1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             armlift2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            armlift1.setPower(-speed);
-            armlift2.setPower(-speed);
+            armlift1.setVelocity(-200);
+            armlift2.setVelocity(-200);
+            
             armlift1.setTargetPosition(armlift1.getCurrentPosition());
             armlift2.setTargetPosition(armlift2.getCurrentPosition());
+            
         } else if (ltrigger<=0 && rtrigger<=0) {
             armlift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armlift2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            
+            
         }
 
 
