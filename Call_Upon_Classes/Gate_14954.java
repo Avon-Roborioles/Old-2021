@@ -19,18 +19,19 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
  
     public void control_gate (Gamepad gp, Telemetry telemetry) {
-        
-        
+
         boolean open = gp.x;
         boolean close = gp.b;
         
         if (open) {
-          gate.setPosition(20); //need to check 
+          gate.setPosition(.01); //need to check
         } else if (close) {
-          gate.setPosition(60); //need to check 
+          gate.setPosition(1); //need to check
         }
-        
+        get_telemetry(telemetry);
     }
- 
+    public void get_telemetry (Telemetry telemetry) {
+        telemetry.addData("Position",gate.getPosition());
+      }
  
 }
