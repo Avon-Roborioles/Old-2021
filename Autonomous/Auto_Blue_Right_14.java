@@ -23,15 +23,8 @@ public class Auto_Blue_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base
 
         auto_carousel.run_carousel_auto(telemetry,false);
 
-        auto_motors.strafeRight(.75, 20);
-        auto_motors.goToSpot((int) (-inchToTicks*6), .75);
-
-
-
-
-
-
-
+        auto_motors.strafeRight(.75, 25);
+        auto_motors.goToSpot((int) (-inchToTicks*9), .75);
 
         Thread.sleep(10000);
     }

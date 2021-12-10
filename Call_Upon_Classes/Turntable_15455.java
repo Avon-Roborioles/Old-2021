@@ -17,6 +17,7 @@ public class Turntable_15455 {
     public void init_turntable(HardwareMap map, Telemetry telemetry, String name) {
         turntable = map.get(CRServo.class, name);
         TTEncoder = map.get(DcMotor.class, name);
+        this.telemetry = telemetry;
     }
 
     public void run_turntable(Gamepad gamepad1, Telemetry telemetry) {
