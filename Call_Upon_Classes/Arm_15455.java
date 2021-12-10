@@ -34,7 +34,7 @@ public class Arm_15455{
 
         if (dpad_up && (pos<=87.5 || gamepad1.back)) {
             speed = 1;
-        } else if (dpad_down&& (pos>=1 || gamepad1.back)) {
+        } else if (dpad_down&& (pos>=0 || gamepad1.back)) {
             speed = -1;
         } else {
             speed = 0;
@@ -48,7 +48,7 @@ public class Arm_15455{
     }
 
     public void get_telemetry (Telemetry telemetry) {
-        telemetry.addData("encoder", arm.getCurrentPosition()/22.7%360);
+        telemetry.addData("arm encoder", arm.getCurrentPosition());
         telemetry.addData("Arm Speed", speed);
     }
 

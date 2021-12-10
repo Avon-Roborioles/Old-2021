@@ -16,6 +16,7 @@ public abstract class Auto_Base_15 extends LinearOpMode {
 
     public void init_classes(boolean red_alliance) {
         auto_motors.init_auto_drive_motors(hardwareMap, telemetry);
+
         auto_carousel.init_carousel(hardwareMap, "carousel", false);
         arm.init_arm(hardwareMap, "arm");
         intake.init_intake(hardwareMap, "intake");
