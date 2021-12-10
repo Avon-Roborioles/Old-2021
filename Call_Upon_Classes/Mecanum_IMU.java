@@ -43,15 +43,49 @@ public class Mecanum_IMU {
         imu.initialize(parameters);
     }
 
-    public void run_motors() {
+    public void run_motors_forward() {
         correction = checkDirection();
 
         fl.setPower(power - correction);
         bl.setPower(power - correction);
         fr.setPower(power + correction);
         br.setPower(power + correction);
+    }
 
+    public void setRelativeTargetIndividual(int fl_target, int bl_target, int fr_target, int br_target) {
+        fl.setTargetPosition(fl_target + fl.getCurrentPosition());
+        bl.setTargetPosition(bl_target + bl.getCurrentPosition());
+        fr.setTargetPosition(fr_target + fr.getCurrentPosition());
+        br.setTargetPosition(br_target + br.getCurrentPosition());
+    }
 
+    public void setPowerIndividual(double FL, double FR, double BR, double BL){
+        fl.setPower(FL);
+        br.setPower(BR);
+        bl.setPower(BL);
+        fr.setPower(FR);
+    }
+
+    public void strafeLeft(double inches, double power) {
+        //107 ticks= 1 inch
+        inches*=107;
+        setRelativeTargetIndividual((int)-inches,(int) inches,(int)inches,(int)-inches);
+
+        while (isBusy()) {
+            correction = checkDirection();
+
+            if(correction > 0) { //positive
+                fl.setPower(-1 * (power + correction));
+                bl.setPower(power - correction);
+                fr.setPower(power - correction);
+                br.setPower(-1 * (power + correction));
+            } else { //negative
+                fl.setPower(-1 * (power - correction));
+                bl.setPower(power + correction);
+                fr.setPower(power + correction);
+                br.setPower(-1 * (power - correction));
+            }
+        }
     }
 
     private double getAngle() {
@@ -73,18 +107,32 @@ public class Mecanum_IMU {
     }
 
     private double checkDirection() {
-        double correction, angle, gain = .1;
+        double correction, gain = .1;
 
-        angle = getAngle();
-
-        if(angle == 0)
-            correction = 0;
-        else
-            correction = -angle; //go opposite of where we're currently going
-
-        correction *= gain;
+        correction  = -1 * getAngle(); //opposite of where we're currently heading
+        correction *= gain; //......idk
 
         return correction;
     }
 
+
+    public boolean isBusy (){
+//        getTelemetry(telemetry);
+        int totalBusy=0;
+        if (fl.isBusy())
+            totalBusy++;
+        if (bl.isBusy())
+            totalBusy++;
+        if (br.isBusy())
+            totalBusy++;
+        if (fr.isBusy())
+            totalBusy++;
+
+        if (totalBusy>=4)
+            return true;
+        else
+            return false;
+    }
+
+    
 }

@@ -11,6 +11,8 @@ public abstract class Auto_Base_15 extends LinearOpMode {
     protected org.firstinspires.ftc.teamcode.Intake_15455 intake = new org.firstinspires.ftc.teamcode.Intake_15455();
     protected org.firstinspires.ftc.teamcode.Turntable_15455 turntable = new org.firstinspires.ftc.teamcode.Turntable_15455();
 
+    protected org.firstinspires.ftc.teamcode.Mecanum_IMU imu_drive = new org.firstinspires.ftc.teamcode.Mecanum_IMU();
+
     protected int inchToTicks = 91;
     protected int scorePosition;
 
