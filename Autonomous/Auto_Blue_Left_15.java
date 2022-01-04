@@ -12,7 +12,7 @@ public class Auto_Blue_Left_15 extends org.firstinspires.ftc.teamcode.Auto_Base_
     @Override
     public void runOpMode() throws InterruptedException {
         this.init_classes(false);
-        imu_drive.init_auto_drive_motors(hardwareMap, telemetry);
+        imu_drive.init_drive_motors(hardwareMap, telemetry);
 
         waitForStart();
 //        arm.autoArmUp(3);

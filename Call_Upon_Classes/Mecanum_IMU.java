@@ -18,9 +18,10 @@ public class Mecanum_IMU {
     private BNO055IMU imu;
 
     double globalAngle, correction, power = .2;
+    double zeroAngle = 0;
     Orientation lastAngles = new Orientation();
 
-    public void init_auto_drive_motors(HardwareMap hardwareMap, Telemetry telemetry) {
+    public void init_drive_motors(HardwareMap hardwareMap, Telemetry telemetry) {
         fl = hardwareMap.get(DcMotor.class, "fl");
         fr = hardwareMap.get(DcMotor.class, "fr");
         bl = hardwareMap.get(DcMotor.class, "bl");
@@ -28,6 +29,37 @@ public class Mecanum_IMU {
         bl.setDirection(DcMotor.Direction.REVERSE);
         fl.setDirection(DcMotor.Direction.REVERSE);
         init_IMU(hardwareMap);
+        init_auto_motors();
+        this.telemetry = telemetry;
+    }
+
+    private void init_auto_motors() {
+        fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fl.setTargetPosition(0);
+        fl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fr.setTargetPosition(0);
+        fr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bl.setTargetPosition(0);
+        bl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        br.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        br.setTargetPosition(0);
+        br.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    private void set_mode_RTP_motors() {
+        fl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        br.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    private void set_mode_RWE_motors() {
+        fl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        fr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        br.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     private void init_IMU(HardwareMap hardwareMap) {
@@ -43,13 +75,22 @@ public class Mecanum_IMU {
         imu.initialize(parameters);
     }
 
-    public void run_motors_forward() {
-        correction = checkDirection();
+    public void goToSpot(double inches, double power) {
+        inches *= 91;
+        setRelativeTargetAll(inches);
 
-        fl.setPower(power - correction);
-        bl.setPower(power - correction);
-        fr.setPower(power + correction);
-        br.setPower(power + correction);
+        while(isBusy()) {
+            getTelemetry();
+            correction = checkDirection();
+            if(inches < 0)
+                correction *= -1;
+
+            fl.setPower(power - correction);
+            bl.setPower(power - correction);
+            fr.setPower(power + correction);
+            br.setPower(power + correction);
+        }
+        setPowerAll(0);
     }
 
     public void setRelativeTargetIndividual(int fl_target, int bl_target, int fr_target, int br_target) {
@@ -58,12 +99,23 @@ public class Mecanum_IMU {
         fr.setTargetPosition(fr_target + fr.getCurrentPosition());
         br.setTargetPosition(br_target + br.getCurrentPosition());
     }
-
+    public void setRelativeTargetAll(double target) {
+        fl.setTargetPosition(fl.getCurrentPosition() + (int)target);
+        bl.setTargetPosition(bl.getCurrentPosition() + (int)target);
+        fr.setTargetPosition(fr.getCurrentPosition() + (int)target);
+        br.setTargetPosition(br.getCurrentPosition() + (int)target);
+    }
     public void setPowerIndividual(double FL, double FR, double BR, double BL){
         fl.setPower(FL);
         br.setPower(BR);
         bl.setPower(BL);
         fr.setPower(FR);
+    }
+    public void setPowerAll(double power) {
+        fl.setPower(0);
+        fr.setPower(0);
+        bl.setPower(0);
+        br.setPower(0);
     }
 
     public void strafeLeft(double inches, double power) {
@@ -71,21 +123,63 @@ public class Mecanum_IMU {
         inches*=107;
         setRelativeTargetIndividual((int)-inches,(int) inches,(int)inches,(int)-inches);
 
+        this.turnToReset(.3);
         while (isBusy()) {
             correction = checkDirection();
+            //if positive correction needed, needs to go counter-clockwise -> adds power to front
+            //if negative, needs to go clockwise -> adds power to back
 
-            if(correction > 0) { //positive
-                fl.setPower(-1 * (power + correction));
-                bl.setPower(power - correction);
-                fr.setPower(power - correction);
-                br.setPower(-1 * (power + correction));
-            } else { //negative
-                fl.setPower(-1 * (power - correction));
-                bl.setPower(power + correction);
-                fr.setPower(power + correction);
-                br.setPower(-1 * (power - correction));
-            }
+            fl.setPower(-1 * (power + correction));
+            bl.setPower(power - correction);
+            fr.setPower(power + correction);
+            br.setPower(-1 * (power - correction));
+
         }
+        setPowerAll(0);
+
+        this.turnToReset(.3);
+    }
+    public void strafeRight(double inches, double power) {
+        //107 ticks= 1 inch
+        inches*=107;
+        setRelativeTargetIndividual((int)inches,(int)-inches,(int)-inches,(int)inches);
+
+        this.turnToReset(.4);
+        while (isBusy()) {
+            correction = checkDirection();
+            //if positive correction needed, needs to go counter-clockwise -> adds power to front
+            //if negative, needs to go clockwise -> adds power to back
+
+            fl.setPower(power + correction);
+            bl.setPower(-1 * (power - correction));
+            fr.setPower(-1 * (power + correction));
+            br.setPower(power - correction);
+
+        }
+        setPowerAll(0);
+
+        this.turnToReset(.3);
+    }
+    private void turnToReset(double power) {
+        this.set_mode_RWE_motors();
+        while(Math.abs(getAngle()) > 1) {
+            correction = checkDirection();
+
+            if (correction > 0) { //positive correction needed - need to go counterclockwise
+                fl.setPower(-1 * power);
+                bl.setPower(-1 * power);
+                fr.setPower(power);
+                br.setPower(power);
+            } else { //negative corr needed - need to go clockwise
+                fl.setPower(power);
+                bl.setPower(power);
+                fr.setPower(-1 * power);
+                br.setPower(-1 * power);
+            }
+            getTelemetry();
+        }
+        this.setPowerAll(0);
+        this.set_mode_RTP_motors();
     }
 
     private double getAngle() {
@@ -103,36 +197,48 @@ public class Mecanum_IMU {
 
         lastAngles = angles;
 
-        return globalAngle;
+        return globalAngle - zeroAngle; //??
     }
-
     private double checkDirection() {
-        double correction, gain = .1;
+        double correction, gain = .05;
 
         correction  = -1 * getAngle(); //opposite of where we're currently heading
-        correction *= gain; //......idk
+        while (correction >= 1) {
+            correction *= gain;
+        }
 
         return correction;
     }
-
+    public void setZero() {
+        this.zeroAngle = this.getAngle();
+    }
 
     public boolean isBusy (){
-//        getTelemetry(telemetry);
+        getTelemetry();
         int totalBusy=0;
-        if (fl.isBusy())
+        if (fl.isBusy()) {
             totalBusy++;
-        if (bl.isBusy())
+        }
+        if (bl.isBusy()) {
             totalBusy++;
-        if (br.isBusy())
+        }
+        if (br.isBusy()) {
             totalBusy++;
-        if (fr.isBusy())
+        }
+        if (fr.isBusy()) {
             totalBusy++;
+        }
 
-        if (totalBusy>=4)
+        if (totalBusy>=3)
             return true;
         else
             return false;
     }
 
+    public void getTelemetry() {
+        this.telemetry.addData("heading: ", this.getAngle());
+        this.telemetry.addData("correction: ", this.correction);
+        telemetry.update();
+    }
     
 }

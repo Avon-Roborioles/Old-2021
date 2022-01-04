@@ -50,25 +50,11 @@ public class Mecanum_Methods_Autonomus {
         br.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-    public void setTargetAll(int target){
-        fl.setTargetPosition(target);
-        bl.setTargetPosition(target);
-        fr.setTargetPosition(target);
-        br.setTargetPosition(target);
-    }
-
     public void setRelativeTargetAll(int target) {
         fl.setTargetPosition(fl.getCurrentPosition() + target);
         bl.setTargetPosition(bl.getCurrentPosition() + target);
         fr.setTargetPosition(fr.getCurrentPosition() + target);
         br.setTargetPosition(br.getCurrentPosition() + target);
-    }
-
-    public void setTargetIndividual(int fl_target, int bl_target, int fr_target, int br_target){
-        fl.setTargetPosition(fl_target);
-        bl.setTargetPosition(bl_target);
-        fr.setTargetPosition(fr_target);
-        br.setTargetPosition(br_target);
     }
 
     public void setRelativeTargetIndividual(int fl_target, int bl_target, int fr_target, int br_target) {
