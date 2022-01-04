@@ -120,7 +120,7 @@ public class Mecanum_IMU {
 
     public void strafeLeft(double inches, double power) {
         //107 ticks= 1 inch
-        inches*=107;
+        inches*=130;
         setRelativeTargetIndividual((int)-inches,(int) inches,(int)inches,(int)-inches);
 
         this.turnToReset(.3);
