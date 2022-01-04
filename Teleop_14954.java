@@ -22,7 +22,7 @@ public class Teleop_14954 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         drivingMotors.init_drive_motors(hardwareMap);
         carousel.init_carousel(hardwareMap, "carousel", true);
-        armlifts.init_armlift(hardwareMap, "armlift1", "armlift2");
+        armlifts.init_armliftv2(hardwareMap, "armlift1", "armlift2");
         intake.init_intake(hardwareMap, "intake");
         gate.init_gate(hardwareMap, "gate");
         telemetry.addData(">>", "Start when ready!");
@@ -36,7 +36,7 @@ public class Teleop_14954 extends LinearOpMode {
             carousel.run_carousel_loop(gamepad1, telemetry); //carousel
             
             //Driver 2 Functions
-            armlifts.run_arm(gamepad2, telemetry); //arm
+            armlifts.run_armv2(gamepad2, telemetry); //arm
             intake.run_intake(gamepad2, telemetry); //intake
             gate.control_gate(gamepad2, telemetry); //intake gate
 
