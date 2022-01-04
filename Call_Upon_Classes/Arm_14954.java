@@ -14,7 +14,7 @@ public class Arm_14954 {
     private DcMotor armlift1 = null;
     private DcMotor armlift2 = null;
     private double speed = .6;
-    
+    //
 
     public void init_armlift (HardwareMap map, String name1, String name2) {
         armlift1  = map.get(DcMotor.class, name1);
