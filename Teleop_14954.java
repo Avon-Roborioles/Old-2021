@@ -22,7 +22,7 @@ public class Teleop_14954 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         drivingMotors.init_drive_motors(hardwareMap);
         carousel.init_carousel(hardwareMap, "carousel", true);
-        armlifts.init_armliftv2(hardwareMap, "armlift1", "armlift2");
+        armlifts.init_armlift(hardwareMap, "armlift1", "armlift2");
         intake.init_intake(hardwareMap, "intake");
         gate.init_gate(hardwareMap, "gate");
         telemetry.addData(">>", "Start when ready!");
