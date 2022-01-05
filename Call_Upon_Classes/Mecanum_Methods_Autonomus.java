@@ -17,6 +17,7 @@ public class Mecanum_Methods_Autonomus {
     private Telemetry telemetry = null;
 
 
+
     private void init_drive_motors(HardwareMap hardwareMap) {
         fl = hardwareMap.get(DcMotor.class, "fl");
         fr = hardwareMap.get(DcMotor.class, "fr");
@@ -49,25 +50,11 @@ public class Mecanum_Methods_Autonomus {
         br.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-    public void setTargetAll(int target){
-        fl.setTargetPosition(target);
-        bl.setTargetPosition(target);
-        fr.setTargetPosition(target);
-        br.setTargetPosition(target);
-    }
-
     public void setRelativeTargetAll(int target) {
         fl.setTargetPosition(fl.getCurrentPosition() + target);
         bl.setTargetPosition(bl.getCurrentPosition() + target);
         fr.setTargetPosition(fr.getCurrentPosition() + target);
         br.setTargetPosition(br.getCurrentPosition() + target);
-    }
-
-    public void setTargetIndividual(int fl_target, int bl_target, int fr_target, int br_target){
-        fl.setTargetPosition(fl_target);
-        bl.setTargetPosition(bl_target);
-        fr.setTargetPosition(fr_target);
-        br.setTargetPosition(br_target);
     }
 
     public void setRelativeTargetIndividual(int fl_target, int bl_target, int fr_target, int br_target) {
@@ -119,16 +106,16 @@ public class Mecanum_Methods_Autonomus {
         while (isBusy()){}
     }
 
-    public void strafeLeft(double power, int inches) {
+    public void strafeLeft(double power, double inches) {
         //107 ticks= 1 inch
         inches*=107;
-        setRelativeTargetIndividual(-inches, inches,inches,-inches);
+        setRelativeTargetIndividual((int)-inches,(int) inches,(int)inches,(int)-inches);
         setPowerIndividual(-power, power, -power, power);
         while (isBusy()){}
     }
-    public void strafeRight(double power, int inches) {
+    public void strafeRight(double power, double inches) {
         inches*=107;
-        setRelativeTargetIndividual(inches,-inches,-inches,inches);
+        setRelativeTargetIndividual((int)inches,(int)-inches,(int)-inches,(int)inches);
         setPowerIndividual(power, -power, power, -power);
         while (isBusy()){}
     }
@@ -146,7 +133,7 @@ public class Mecanum_Methods_Autonomus {
         if (fr.isBusy())
             totalBusy++;
 
-        if (totalBusy>=3)
+        if (totalBusy>=4)
             return true;
         else
             return false;

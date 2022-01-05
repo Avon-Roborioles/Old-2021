@@ -10,6 +10,7 @@ public abstract class Auto_Base_14 extends LinearOpMode {
     protected org.firstinspires.ftc.teamcode.Arm_14954 armlifts = new org.firstinspires.ftc.teamcode.Arm_14954();
     protected org.firstinspires.ftc.teamcode.Intake_14954 intake = new org.firstinspires.ftc.teamcode.Intake_14954();
 
+    protected org.firstinspires.ftc.teamcode.Mecanum_IMU imu_drive = new org.firstinspires.ftc.teamcode.Mecanum_IMU();
 
     protected int inchToTicks = 91;
     protected int scorePosition;
@@ -20,6 +21,8 @@ public abstract class Auto_Base_14 extends LinearOpMode {
         armlifts.init_armlift(hardwareMap, "armlift1", "armlift2");
         intake.init_intake(hardwareMap, "intake");
         distance_sensor.initDistance(hardwareMap, telemetry, red_alliance);
+
+        imu_drive.init_drive_motors(hardwareMap, telemetry);
     }
     public void sense_barcode (){
         scorePosition = 3; //furthest to the right, won't be changed if it doesn't see 1 or 2
@@ -27,7 +30,7 @@ public abstract class Auto_Base_14 extends LinearOpMode {
         if(distance_sensor.checkSeesSomething()) {
             scorePosition = 2;
         }
-        auto_motors.goToSpot(inchToTicks * -8, 1);
+        imu_drive.goToSpot(-8, 1);
 
         if(distance_sensor.checkSeesSomething()) {
             scorePosition = 1;

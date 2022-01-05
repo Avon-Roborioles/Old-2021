@@ -8,33 +8,59 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 public class Auto_Blue_Left_15 extends org.firstinspires.ftc.teamcode.Auto_Base_15 {
 
+
     @Override
     public void runOpMode() throws InterruptedException {
         this.init_classes(false);
-
+        imu_drive.init_drive_motors(hardwareMap, telemetry);
 
         waitForStart();
-
-        this.sense_barcode();
-
-
-        auto_motors.goToSpot(inchToTicks*40, 1);
-        arm.autoArmUp(3);
-        turntable.turntable_auto(90, .75);
-
-        //go to actual level
-        arm.autoArmUp(this.scorePosition);
-        auto_motors.strafeRight(1, 7); //make this dependent a bit on which level?
-
-        intake.autoEject();
-        turntable.turntable_auto(-90,-.75);
-        arm.autoArmDown();
-        auto_motors.turn90left(.75);
-        auto_motors.goToSpot(30*inchToTicks, 1);
+//        arm.autoArmUp(3);
+//        turntable.turntable_auto(90,.5);
+        imu_drive.strafeLeft(100, .5);
 
 
 
-        while (opModeIsActive()) {}
+
+
+
+
+
+//        this.sense_barcode_blue();
+//
+//
+//        auto_motors.goToSpot(-inchToTicks*10, 1);
+//        auto_motors.strafeRight(1, 26);
+//        arm.autoArmUp(2);
+//        turntable.turntable_auto(80, .5);
+//
+//        arm.autoArmUp(scorePosition);
+//
+//        if(scorePosition==1){
+//            auto_motors.strafeRight(.75,5);
+//        }else if (scorePosition==2) {
+//            auto_motors.strafeRight(.75,6.5);
+//        }else{
+//            auto_motors.strafeRight(.75, 8.5);
+//        }
+//        intake.autoEject();
+//        if(scorePosition==1){
+//            auto_motors.strafeLeft(.75,5);
+//        }else if (scorePosition==2) {
+//            auto_motors.strafeLeft(.75,6.5);
+//        }else{
+//            auto_motors.strafeLeft(.75, 8.5);
+//        }
+//        arm.autoArmUp(2);
+//        turntable.turntable_auto(-87, -.5);
+//        arm.autoArmDown();
+//
+//        auto_motors.strafeLeft(1,29);
+//        auto_motors.goToSpot(inchToTicks*55,1);
+//
+
+
+
 
     }
 }

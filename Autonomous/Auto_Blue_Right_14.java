@@ -2,10 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 
 @Autonomous
-
+//@Disabled
 public class Auto_Blue_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base_14 {
 
     @Override
@@ -15,14 +16,16 @@ public class Auto_Blue_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base
 
         waitForStart();
 
-        auto_motors.strafeRight(0.8,6);
-        auto_motors.goToSpot((int) (-inchToTicks*25), .75);
+        // this.sense_barcode();
+
+        imu_drive.strafeRight(6, .8);
+        imu_drive.goToSpot((int) (-25), .75);
 
         auto_carousel.run_carousel_auto(telemetry,false);
 
-        auto_motors.strafeRight(.75, 24);
-        auto_motors.goToSpot((int) (-inchToTicks*9), .75);
+        imu_drive.strafeRight(30, .75);
+        imu_drive.goToSpot((int) (-9), .75);
 
-//        Thread.sleep(10000);
+        Thread.sleep(10000);
     }
 }
