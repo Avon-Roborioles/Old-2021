@@ -54,7 +54,7 @@ public class Arm_14954 {
     }
     
 
-    //Test method for normal armlift operation + Passive motor position holder
+   //normal arm operation w/ dpad-down as position holder
     public void run_armv2 (Gamepad gp, Telemetry telemetry) throws InterruptedException {
         double up = gp.left_trigger;
         double down = gp.right_trigger;
@@ -70,7 +70,9 @@ public class Arm_14954 {
             armlift2.setTargetPosition(armlift2.getCurrentPosition() - 200);
             Thread.sleep(50);
         }*/
-
+        
+        
+        //normal arm movement
         if (up > 0) {
             speed = .6;
         } else if (down > 0 ) {
@@ -82,9 +84,8 @@ public class Arm_14954 {
         armlift1.setPower(speed);
         armlift2.setPower(speed);
 
-        if (dpadispressed) {
-
-            if (armholding = false) {
+        //dpad-down as button for position holder
+        if (dpadispressed && armholding = false) {
                 armholding = true;
                 armlift1.setTargetPosition(armlift1.getCurrentPosition());
                 armlift2.setTargetPosition(armlift2.getCurrentPosition());
@@ -94,9 +95,9 @@ public class Arm_14954 {
 
                 armlift1.setPower(0.8);
                 armlift2.setPower(0.8);
-            }
+            
 
-        } else {
+        } else  if (dpadispressed && armholding = true) {
             armholding = false;
             armlift1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             armlift2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -109,6 +110,7 @@ public class Arm_14954 {
 
     public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("Armlift Speed", speed);
+        telemetry.addData("Armlift Positions", armlift1.getCurrentPosition() , armlift2.getCurrentPosition());
     }
 
 }
