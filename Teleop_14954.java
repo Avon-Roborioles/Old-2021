@@ -37,7 +37,7 @@ public class Teleop_14954 extends LinearOpMode {
             carousel.run_carousel_loop(gamepad1, telemetry); //carousel
             
             //Driver 2 Functions
-            armlifts.run_arm(gamepad2, telemetry); //arm
+            armlifts.run_armv2(gamepad2, telemetry); //arm
             intake.run_intake(gamepad2, telemetry); //intake
             gate.control_gate(gamepad2, telemetry); //intake gate
 

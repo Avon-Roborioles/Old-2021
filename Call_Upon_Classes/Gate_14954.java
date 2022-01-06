@@ -26,7 +26,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
         if (open) {
           gate.setPosition(.01); //need to check
         } else if (close) {
-          gate.setPosition(1); //need to check
+          gate.setPosition(0.4); //need to check
         }
         get_telemetry(telemetry);
     }
