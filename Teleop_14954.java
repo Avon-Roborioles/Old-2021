@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
 @TeleOp
-@Disabled
+//@Disabled
 public class Teleop_14954 extends LinearOpMode {
 
     //objects for each function of the robot

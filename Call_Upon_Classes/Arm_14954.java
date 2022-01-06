@@ -20,6 +20,8 @@ public class Arm_14954 {
     public void init_armlift (HardwareMap map, String name1, String name2) {
         armlift1  = map.get(DcMotor.class, name1);
         armlift2  = map.get(DcMotor.class, name2);
+        armlift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        armlift2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
     }
     
@@ -85,23 +87,25 @@ public class Arm_14954 {
         armlift2.setPower(speed);
 
         //dpad-down as button for position holder
-        if (dpadispressed && !armholding) {
-                armholding = true;
-                armlift1.setTargetPosition(armlift1.getCurrentPosition());
-                armlift2.setTargetPosition(armlift2.getCurrentPosition());
+//        if (dpadispressed && !armholding) {
+//                armholding = true;
+//                armlift1.setTargetPosition(armlift1.getCurrentPosition());
+//                armlift2.setTargetPosition(armlift2.getCurrentPosition());
+//
+//                armlift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                armlift2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//                armlift1.setPower(0.8);
+//                armlift2.setPower(0.8);
+//
+//
+//        } else  if (dpadispressed) {
+//            armholding = false;
+//            armlift1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//            armlift2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        }
 
-                armlift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armlift2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                armlift1.setPower(0.8);
-                armlift2.setPower(0.8);
-            
-
-        } else  if (dpadispressed) {
-            armholding = false;
-            armlift1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            armlift2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }
 
         get_telemetry(telemetry);
 
@@ -110,6 +114,7 @@ public class Arm_14954 {
 
     public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("Armlift Speed", speed);
+        telemetry.addData("Armlift Position", armlift1.getCurrentPosition());
     }
 
 }

@@ -48,21 +48,18 @@ public class Turntable_15455 {
         power = Math.abs(power);
         if ((deg>0&&TTEncoder.getCurrentPosition()<target)||(deg<0&&TTEncoder.getCurrentPosition()<target)) {
             power*=-1;
-        while (TTEncoder.getCurrentPosition()<target) {
-            TTEncoder.setPower(power);
-        }}
+            while (TTEncoder.getCurrentPosition()<target) {
+                TTEncoder.setPower(power);
+            }
+        }
         else if ((deg<0&&TTEncoder.getCurrentPosition()>target)||(deg>0&&TTEncoder.getCurrentPosition()>target)){
             while (TTEncoder.getCurrentPosition()>target) {
                 TTEncoder.setPower(power);
-        }}
-
-
-
+            }
+        }
         TTEncoder.setPower(0);
-
-
-
     }
+
     public void arm_0 () {
         if (TTEncoder.getCurrentPosition()>0){
             while (TTEncoder.getCurrentPosition()>0)
@@ -85,7 +82,6 @@ public class Turntable_15455 {
         }
         TTEncoder.setPower(0);
     }
-
 
 
     public void get_telemetry (Telemetry telemetry) {
