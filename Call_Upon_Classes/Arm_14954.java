@@ -14,12 +14,13 @@ public class Arm_14954 {
     private DcMotor armlift1 = null;
     private DcMotor armlift2 = null;
     private double speed = .6;
+    boolean armholding = false;
 
 
     public void init_armlift (HardwareMap map, String name1, String name2) {
         armlift1  = map.get(DcMotor.class, name1);
         armlift2  = map.get(DcMotor.class, name2);
-            boolean armholding = false;
+
     }
     
     
@@ -84,7 +85,7 @@ public class Arm_14954 {
         armlift2.setPower(speed);
 
         //dpad-down as button for position holder
-        if (dpadispressed && armholding = false) {
+        if (dpadispressed && !armholding) {
                 armholding = true;
                 armlift1.setTargetPosition(armlift1.getCurrentPosition());
                 armlift2.setTargetPosition(armlift2.getCurrentPosition());
@@ -96,7 +97,7 @@ public class Arm_14954 {
                 armlift2.setPower(0.8);
             
 
-        } else  if (dpadispressed && armholding = true) {
+        } else  if (dpadispressed) {
             armholding = false;
             armlift1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             armlift2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -109,7 +110,6 @@ public class Arm_14954 {
 
     public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("Armlift Speed", speed);
-        telemetry.addData("Armlift Positions", armlift1.getCurrentPosition() , armlift2.getCurrentPosition());
     }
 
 }
