@@ -53,8 +53,9 @@ public class Arm_15455{
     }
 
     public void autoArmUp(int pos){
+        if (pos==0) {arm.setTargetPosition(45);}
         if (pos==1) {arm.setTargetPosition((int) (40*22.7));}
-        if (pos==2) {arm.setTargetPosition((int) (65*22.7));}
+        if (pos==2) {arm.setTargetPosition((int) (60*22.7));}
         if (pos>=3) {arm.setTargetPosition((int) (87.5*22.7));}
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setPower(.75);
@@ -63,7 +64,7 @@ public class Arm_15455{
 
     }
 
-    public void autoArmDown (){
+    public void autoArmDown() {
         arm.setTargetPosition(50);
         arm.setPower(-1);
         while (arm.getCurrentPosition()>40){
@@ -75,7 +76,7 @@ public class Arm_15455{
         arm.setPower(0);
 
     }
-    public void leds () {
+    public void leds() {
         led1.enableLight(true);
 
 

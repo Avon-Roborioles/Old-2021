@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 
 @Autonomous
-//@Disabled
+@Disabled
 public class Auto_Red_Left_14 extends org.firstinspires.ftc.teamcode.Auto_Base_14 {
 
     @Override

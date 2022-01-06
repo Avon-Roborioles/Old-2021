@@ -20,8 +20,9 @@ public class Mecanum_IMU {
     double globalAngle, correction, power = .2;
     double zeroAngle = 0;
     Orientation lastAngles = new Orientation();
+    int tipsyturnsy=1;
 
-    public void init_drive_motors(HardwareMap hardwareMap, Telemetry telemetry) {
+    public void init_drive_motors(HardwareMap hardwareMap, Telemetry telemetry, boolean upsidedown) {
         fl = hardwareMap.get(DcMotor.class, "fl");
         fr = hardwareMap.get(DcMotor.class, "fr");
         bl = hardwareMap.get(DcMotor.class, "bl");
@@ -31,6 +32,7 @@ public class Mecanum_IMU {
         init_IMU(hardwareMap);
         init_auto_motors();
         this.telemetry = telemetry;
+        if (upsidedown) {tipsyturnsy*=-1;}
     }
 
     private void init_auto_motors() {
@@ -118,12 +120,12 @@ public class Mecanum_IMU {
         br.setPower(0);
     }
 
-    public void strafeLeft(double inches, double power) {
+    public void strafeLeft(double power, double inches) {
         //107 ticks= 1 inch
         inches*=130;
         setRelativeTargetIndividual((int)-inches,(int) inches,(int)inches,(int)-inches);
 
-        this.turnToReset(.3);
+
         while (isBusy()) {
             correction = checkDirection();
             //if positive correction needed, needs to go counter-clockwise -> adds power to front
@@ -139,12 +141,12 @@ public class Mecanum_IMU {
 
         this.turnToReset(.3);
     }
-    public void strafeRight(double inches, double power) {
+    public void strafeRight(double power, double inches) {
         //107 ticks= 1 inch
         inches*=107;
         setRelativeTargetIndividual((int)inches,(int)-inches,(int)-inches,(int)inches);
 
-        this.turnToReset(.4);
+
         while (isBusy()) {
             correction = checkDirection();
             //if positive correction needed, needs to go counter-clockwise -> adds power to front
@@ -207,7 +209,7 @@ public class Mecanum_IMU {
             correction *= gain;
         }
 
-        return correction;
+        return correction*tipsyturnsy;
     }
     public void setZero() {
         this.zeroAngle = this.getAngle();
@@ -237,6 +239,8 @@ public class Mecanum_IMU {
 
     public void getTelemetry() {
         this.telemetry.addData("heading: ", this.getAngle());
+        this.telemetry.addData("zero angle", this.zeroAngle);
+        this.telemetry.addData("true heading", this.globalAngle);
         this.telemetry.addData("correction: ", this.correction);
         telemetry.update();
     }

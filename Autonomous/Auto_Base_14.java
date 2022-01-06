@@ -22,7 +22,7 @@ public abstract class Auto_Base_14 extends LinearOpMode {
         intake.init_intake(hardwareMap, "intake");
         distance_sensor.initDistance(hardwareMap, telemetry, red_alliance);
 
-        imu_drive.init_drive_motors(hardwareMap, telemetry);
+        imu_drive.init_drive_motors(hardwareMap, telemetry, false);
     }
     public void sense_barcode (){
         scorePosition = 3; //furthest to the right, won't be changed if it doesn't see 1 or 2
