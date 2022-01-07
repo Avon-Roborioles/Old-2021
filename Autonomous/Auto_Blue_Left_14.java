@@ -3,7 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 @Autonomous
-@Disabled
+//@Disabled
 public class Auto_Blue_Left_14 extends org.firstinspires.ftc.teamcode.Auto_Base_14 {
 
     @Override
@@ -17,8 +17,8 @@ public class Auto_Blue_Left_14 extends org.firstinspires.ftc.teamcode.Auto_Base_
 
         //imu_drive.strafeLeft(30, .75);
 
-        armlifts.arm_auto(3);
-        Thread.sleep( 10000);
+        armlifts.arm_auto(1);
+//        Thread.sleep( 10000);
     }
 
 }

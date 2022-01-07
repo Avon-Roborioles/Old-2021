@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -22,6 +23,9 @@ public class Arm_14954 {
         armlift2  = map.get(DcMotor.class, name2);
         armlift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         armlift2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        armlift1.setDirection(DcMotorSimple.Direction.REVERSE);
+        armlift2.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
     
@@ -118,8 +122,8 @@ public class Arm_14954 {
             armlift2.setTargetPosition(-100);
 
         } else if (position == 2) {
-            armlift1.setTargetPosition(-200);
-            armlift1.setTargetPosition(-200);
+            armlift1.setTargetPosition(200);
+            armlift1.setTargetPosition(200);
 
         } else if (position == 3) { //highest
             armlift1.setTargetPosition(-300);
@@ -129,15 +133,15 @@ public class Arm_14954 {
         armlift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armlift2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        armlift1.setPower(0.8);
-        armlift2.setPower(0.8);
+        armlift1.setPower(0.6);
+        armlift2.setPower(0.6);
 
         while(armlift1.isBusy() && armlift2.isBusy()) {
 
         }
 
-        armlift1.setPower(0);
-        armlift2.setPower(0);
+//        armlift1.setPower(0);
+//        armlift2.setPower(0);
     }
 
     public void get_telemetry (Telemetry telemetry) {
