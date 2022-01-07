@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 @Autonomous
 
-@Disabled
+//@Disabled
 public class Auto_Blue_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base_14 {
 
     @Override
@@ -19,13 +19,14 @@ public class Auto_Blue_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base
 
         // this.sense_barcode();
 
-        imu_drive.strafeRight(6, .8);
-        imu_drive.goToSpot((int) (-25), .75);
+
+        auto_motors.strafeRight(.8, 6);
+        auto_motors.goToSpot((int) (inchToTicks * -25), .75);
 
         auto_carousel.run_carousel_auto(telemetry,false);
 
-        imu_drive.strafeRight(30, .75);
-        imu_drive.goToSpot((int) (-9), .75);
+        auto_motors.strafeRight(.75, 25);
+        auto_motors.goToSpot((int) (inchToTicks * -9), .75);
 
         Thread.sleep(10000);
     }
