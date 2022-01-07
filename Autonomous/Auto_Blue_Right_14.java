@@ -17,7 +17,7 @@ public class Auto_Blue_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base
 
         waitForStart();
 
-        // this.sense_barcode();
+        // this.sense_barcode(); stuff
 
 
         auto_motors.strafeRight(.8, 6);
@@ -25,7 +25,7 @@ public class Auto_Blue_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base
 
         auto_carousel.run_carousel_auto(telemetry,false);
 
-        auto_motors.strafeRight(.75, 25);
+        auto_motors.strafeRight(.75, 24);
         auto_motors.goToSpot((int) (inchToTicks * -9), .75);
 
         Thread.sleep(10000);
