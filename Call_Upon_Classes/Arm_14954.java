@@ -112,6 +112,34 @@ public class Arm_14954 {
     }
 
 
+    public void arm_auto (int position){
+        if (position == 1) {
+            armlift1.setTargetPosition(-100);
+            armlift2.setTargetPosition(-100);
+
+        } else if (position == 2) {
+            armlift1.setTargetPosition(-200);
+            armlift1.setTargetPosition(-200);
+
+        } else if (position == 3) { //highest
+            armlift1.setTargetPosition(-300);
+            armlift2.setTargetPosition(-300);
+        }
+
+        armlift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armlift2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armlift1.setPower(0.8);
+        armlift2.setPower(0.8);
+
+        while(armlift1.isBusy() && armlift2.isBusy()) {
+
+        }
+
+        armlift1.setPower(0);
+        armlift2.setPower(0);
+    }
+
     public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("Armlift Speed", speed);
         telemetry.addData("Armlift Position", armlift1.getCurrentPosition());
