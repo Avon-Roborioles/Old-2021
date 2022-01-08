@@ -24,8 +24,8 @@ public class Arm_14954 {
         armlift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         armlift2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        armlift1.setDirection(DcMotorSimple.Direction.REVERSE);
-        armlift2.setDirection(DcMotorSimple.Direction.REVERSE);
+        //armlift1.setDirection(DcMotorSimple.Direction.REVERSE);
+        //armlift2.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
     
@@ -66,7 +66,6 @@ public class Arm_14954 {
         double down = gp.right_trigger;
         boolean dpadispressed = gp.dpad_down;
 
-
 /*        if (up > 0) {
            armlift1.setTargetPosition(armlift1.getCurrentPosition() + 200);
             armlift2.setTargetPosition(armlift2.getCurrentPosition() + 200);
@@ -76,8 +75,7 @@ public class Arm_14954 {
             armlift2.setTargetPosition(armlift2.getCurrentPosition() - 200);
             Thread.sleep(50);
         }*/
-        
-        
+
         //normal arm movement
         if (up > 0) {
             speed = .6;
@@ -108,8 +106,6 @@ public class Arm_14954 {
 //            armlift1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //            armlift2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //        }
-
-
 
         get_telemetry(telemetry);
 
