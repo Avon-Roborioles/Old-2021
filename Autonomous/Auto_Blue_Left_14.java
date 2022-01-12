@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
+//Drives straight to warehouse area
 
 @Autonomous
-@Disabled
 public class Auto_Blue_Left_14 extends org.firstinspires.ftc.teamcode.Auto_Base_14 {
 
     @Override
@@ -13,10 +13,12 @@ public class Auto_Blue_Left_14 extends org.firstinspires.ftc.teamcode.Auto_Base_
 
         waitForStart();
 
-//        imu_drive.goToSpot((int) (36), .75);
+        auto_motors.goToSpot((int) (inchToTicks * -25), .75);
 
-        imu_drive.strafeLeft(30, .75);
-        Thread.sleep( 10000);
+        auto_motors.strafeLeft(.75, 30);
+
+        //armlifts.arm_auto(1);
+       Thread.sleep( 10000);
     }
 
 }
