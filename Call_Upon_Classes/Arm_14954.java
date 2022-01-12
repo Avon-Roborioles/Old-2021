@@ -28,8 +28,7 @@ public class Arm_14954 {
         //armlift2.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
-    
-    
+
 
      // Test method for normal armlift operation + Passive motor position holder
    /*public void init_armliftv2 (HardwareMap map, String name1, String name2) {
@@ -62,8 +61,8 @@ public class Arm_14954 {
 
    //normal arm operation w/ dpad-down as position holder
     public void run_armv2 (Gamepad gp, Telemetry telemetry) throws InterruptedException {
-        double up = gp.left_trigger;
-        double down = gp.right_trigger;
+        double up = gp.right_trigger;
+        double down = gp.left_trigger;
         boolean dpadispressed = gp.dpad_down;
 
 /*        if (up > 0) {
