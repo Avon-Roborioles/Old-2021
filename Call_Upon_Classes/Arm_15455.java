@@ -70,7 +70,7 @@ public class Arm_15455{
         while (arm.getCurrentPosition()>40){
 //            double previousPosition = arm.getCurrentPosition();
 
-            if (arm.getCurrentPosition()>85*107) // || arm.getCurrentPosition() > previousPosition)
+            if (arm.getCurrentPosition()>88*22.7) // || arm.getCurrentPosition() > previousPosition)
                 break;
         }
         arm.setPower(0);

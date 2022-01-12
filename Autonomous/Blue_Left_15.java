@@ -14,49 +14,38 @@ public class Blue_Left_15 extends org.firstinspires.ftc.teamcode.Auto_Base_15 {
         this.init_classes(false);
 
         waitForStart();
-//        arm.autoArmUp(3);
-//        turntable.turntable_auto(90,.5);
-        imu_drive.strafeLeft(100, .5);
+        this.sense_barcode_blue();
+        imu_drive.setZero();
 
 
 
+        imu_drive.goToSpot(-8, 1);
+        imu_drive.strafeRight(1, 22);
+        arm.autoArmUp(2);
+        turntable.turntable_auto(90, .5);
 
+        arm.autoArmUp(scorePosition);
 
-
-
-
-//        this.sense_barcode_blue();
-//
-//
-//        auto_motors.goToSpot(-inchToTicks*10, 1);
-//        auto_motors.strafeRight(1, 26);
-//        arm.autoArmUp(2);
-//        turntable.turntable_auto(80, .5);
-//
-//        arm.autoArmUp(scorePosition);
-//
-//        if(scorePosition==1){
-//            auto_motors.strafeRight(.75,5);
-//        }else if (scorePosition==2) {
-//            auto_motors.strafeRight(.75,6.5);
-//        }else{
-//            auto_motors.strafeRight(.75, 8.5);
-//        }
-//        intake.autoEject();
-//        if(scorePosition==1){
-//            auto_motors.strafeLeft(.75,5);
-//        }else if (scorePosition==2) {
-//            auto_motors.strafeLeft(.75,6.5);
-//        }else{
-//            auto_motors.strafeLeft(.75, 8.5);
-//        }
-//        arm.autoArmUp(2);
-//        turntable.turntable_auto(-87, -.5);
-//        arm.autoArmDown();
-//
-//        auto_motors.strafeLeft(1,29);
-//        auto_motors.goToSpot(inchToTicks*55,1);
-//
+        if(scorePosition==1){
+            imu_drive.strafeRight(.75,4.5);
+        }else if (scorePosition==2) {
+            imu_drive.strafeRight(.75,6);
+        }else{
+            imu_drive.strafeRight(.75, 8);
+        }
+        intake.autoEject();
+        if(scorePosition==1){
+            imu_drive.strafeLeft(.75,4.5);
+        }else if (scorePosition==2) {
+            imu_drive.strafeLeft(.75,6);
+        }else{
+            imu_drive.strafeLeft(.75, 8);
+        }
+        arm.autoArmUp(2);
+        turntable.turntable_auto(8, .5);
+        arm.autoArmDown();
+        imu_drive.strafeLeft(1,22);
+        imu_drive.goToSpot(55,1);
 
 
 

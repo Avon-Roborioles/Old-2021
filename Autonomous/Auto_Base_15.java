@@ -26,6 +26,8 @@ public abstract class Auto_Base_15 extends LinearOpMode {
         turntable.init_turntable(hardwareMap,telemetry,  "turntable");
 
         imu_drive.init_drive_motors(hardwareMap, telemetry, false);
+
+
     }
     public void sense_barcode_red (){
         scorePosition = 3; //furthest to the right, won't be changed if it doesn't see 1 or 2
@@ -33,14 +35,14 @@ public abstract class Auto_Base_15 extends LinearOpMode {
         if(distance_sensor.checkSeesSomething()) {
             scorePosition = 2;
         }
-        auto_motors.goToSpot(inchToTicks * -8, 1);
+        auto_motors.goToSpot(-8, 1);
 
         if(distance_sensor.checkSeesSomething()) {
             scorePosition = 1;
         }
 
         telemetry.addData("Final Scoring Position Found: ", scorePosition);
-//        telemetry.update();
+        telemetry.update();
         //done sensing barcode :)
     }
 
@@ -50,14 +52,14 @@ public abstract class Auto_Base_15 extends LinearOpMode {
         if(distance_sensor.checkSeesSomething()) {
             scorePosition = 2;
         }
-        auto_motors.goToSpot(inchToTicks * -8, 1);
+        auto_motors.goToSpot(-8, 1);
 
         if(distance_sensor.checkSeesSomething()) {
             scorePosition = 3;
         }
 
         telemetry.addData("Final Scoring Position Found: ", scorePosition);
-//        telemetry.update();
+        telemetry.update();
         //done sensing barcode :)
     }
 }

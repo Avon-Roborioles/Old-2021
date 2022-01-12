@@ -40,7 +40,7 @@ public class Intake_15455{
         intake.setPower(.6);
         Thread.sleep(1000);
         intake.setPower(0);
-        Thread.sleep(500);
+        Thread.sleep(250);
     }
 
 

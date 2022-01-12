@@ -231,7 +231,7 @@ public class Mecanum_IMU {
             totalBusy++;
         }
 
-        if (totalBusy>=3)
+        if (totalBusy>=4)
             return true;
         else
             return false;

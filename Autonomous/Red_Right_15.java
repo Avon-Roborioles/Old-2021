@@ -16,38 +16,41 @@ public class Red_Right_15 extends org.firstinspires.ftc.teamcode.Auto_Base_15 {
         this.init_classes(true);
 
 
-        waitForStart();
-        this.sense_barcode_red();
-        auto_motors.goToSpot(40*inchToTicks,1);
 
-//
-//        auto_motors.goToSpot(-inchToTicks*10, 1);
-//        auto_motors.strafeLeft(1, 26);
-//        arm.autoArmUp(2);
-//        turntable.turntable_auto(-80, -.5);
-//
-//        arm.autoArmUp(scorePosition);
-//
-//        if(scorePosition==1){
-//            auto_motors.strafeLeft(.75,5);
-//        }else if (scorePosition==2) {
-//            auto_motors.strafeLeft(.75,6.5);
-//        }else{
-//            auto_motors.strafeLeft(.75, 8.5);
-//        }
-//        intake.autoEject();
-//        if(scorePosition==1){
-//            auto_motors.strafeRight(.75,5);
-//        }else if (scorePosition==2) {
-//            auto_motors.strafeRight(.75,6.5);
-//        }else{
-//            auto_motors.strafeRight(.75, 8.5);
-//        }
-//        arm.autoArmUp(2);
-//        turntable.turntable_auto(87, .5);
-//        arm.autoArmDown();
-//        auto_motors.strafeRight(1,9);
-//        auto_motors.goToSpot(inchToTicks*55,1);
+        waitForStart();
+
+        this.sense_barcode_red();
+        imu_drive.setZero();
+
+
+
+        imu_drive.goToSpot(-12, 1);
+        imu_drive.strafeLeft(1, 16);
+        arm.autoArmUp(2);
+        turntable.turntable_auto(-90, .5);
+
+        arm.autoArmUp(scorePosition);
+
+        if(scorePosition==1){
+            imu_drive.strafeLeft(.75,4.5);
+        }else if (scorePosition==2) {
+            imu_drive.strafeLeft(.75,6);
+        }else{
+            imu_drive.strafeLeft(.75, 8);
+        }
+        intake.autoEject();
+        if(scorePosition==1){
+            imu_drive.strafeRight(.75,4.5);
+        }else if (scorePosition==2) {
+            imu_drive.strafeRight(.75,6);
+        }else{
+            imu_drive.strafeRight(.75, 8);
+        }
+        arm.autoArmUp(2);
+        turntable.turntable_auto(-1, .5);
+        arm.autoArmDown();
+        imu_drive.strafeRight(1,20);
+        imu_drive.goToSpot(55,1);
 
 
 
