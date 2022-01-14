@@ -19,18 +19,27 @@ public class Auto_Blue_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base
         waitForStart();
 
         // this.sense_barcode(); stuff
+        auto_motors.strafeLeft(1, 1);
+
+        imu_drive.setZero();
+
+        imu_drive.strafeRight(.8, 12);
+
+        auto_motors.goToSpot(-20, .75);
+
+        auto_carousel.run_carousel_auto_14(telemetry,false);
 
 
-        auto_motors.strafeRight(.8, 6);
-        auto_motors.goToSpot((int) (inchToTicks * -25), .75);
+        imu_drive.turnToReset(1);
 
-        auto_carousel.run_carousel_auto(telemetry,false);
-
-        auto_motors.strafeRight(.75, 20);
+        auto_motors.goToSpot(5,.75);
 
 
+        imu_drive.strafeRight(.75, 25);
 
-        auto_motors.goToSpot((int) (inchToTicks * -9), .75);
+
+
+        auto_motors.goToSpot(-9, .75);
 
         Thread.sleep(10000);
     }

@@ -162,7 +162,7 @@ public class Mecanum_IMU {
 
         this.turnToReset(.3);
     }
-    private void turnToReset(double power) {
+    public void turnToReset(double power) {
         this.set_mode_RWE_motors();
         while(Math.abs(getAngle()) > 1) {
             correction = checkDirection();

@@ -92,6 +92,24 @@ public class Carousel_Call{
 
 
     }
+
+    public void run_carousel_auto_14 (Telemetry telemetry, boolean red) {
+        double speed=.3;
+        if (red) {
+            speed*=-1;
+        }
+        for (int i=0; i<1500; i++) {
+            carousel.setPower(speed);
+
+            get_telemetry(telemetry);
+
+        }
+        displayFinalSpeed = carouselIncrSpeed;
+        get_telemetry(telemetry);
+        carousel.setPower(0);
+
+
+    }
 //
 //    public void stop_carousel_auto (Telemetry telemetry) {
 
