@@ -1,9 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -15,7 +12,7 @@ public class Arm_14954 {
     private DcMotor armlift1 = null;
     private DcMotor armlift2 = null;
     private double speed = .6;
-    boolean armholding = false;
+
 
 
     public void init_armlift (HardwareMap map, String name1, String name2) {
@@ -29,16 +26,6 @@ public class Arm_14954 {
 
     }
 
-
-     // Test method for normal armlift operation + Passive motor position holder
-   /*public void init_armliftv2 (HardwareMap map, String name1, String name2) {
-       armlift1  = map.get(DcMotor.class, name1);
-       armlift2  = map.get(DcMotor.class, name2);
-
-       boolean armholding = false;
-   }*/
-
-    
     public void run_arm(Gamepad gp, Telemetry telemetry) {
 
         double ltrigger = gp.left_trigger;
@@ -58,22 +45,10 @@ public class Arm_14954 {
         get_telemetry(telemetry);
     }
     
-
-   //normal arm operation w/ dpad-down as position holder
     public void run_armv2 (Gamepad gp, Telemetry telemetry) throws InterruptedException {
         double up = gp.right_trigger;
         double down = gp.left_trigger;
         boolean dpadispressed = gp.dpad_down;
-
-/*        if (up > 0) {
-           armlift1.setTargetPosition(armlift1.getCurrentPosition() + 200);
-            armlift2.setTargetPosition(armlift2.getCurrentPosition() + 200);
-            Thread.sleep(50);
-        } else if (down > 0) {
-            armlift1.setTargetPosition(armlift1.getCurrentPosition() - 200);
-            armlift2.setTargetPosition(armlift2.getCurrentPosition() - 200);
-            Thread.sleep(50);
-        }*/
 
         //normal arm movement
         if (up > 0) {
@@ -87,84 +62,33 @@ public class Arm_14954 {
         armlift1.setPower(speed);
         armlift2.setPower(speed);
 
-        //dpad-down as button for position holder
-//        if (dpadispressed && !armholding) {
-//                armholding = true;
-//                armlift1.setTargetPosition(armlift1.getCurrentPosition());
-//                armlift2.setTargetPosition(armlift2.getCurrentPosition());
-//
-//                armlift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                armlift2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//                armlift1.setPower(0.8);
-//                armlift2.setPower(0.8);
-//
-//
-//        } else  if (dpadispressed) {
-//            armholding = false;
-//            armlift1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//            armlift2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        }
 
         get_telemetry(telemetry);
 
     }
 
-//Raises arm to selected position and holds it
-    public void arm_auto (int position){
+    public void arm_auto (int position) {
         if (position == 1) {
-            armlift1.setTargetPosition(-100);
-            armlift2.setTargetPosition(-100);
-
-            armlift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            armlift2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            armlift1.setPower(0.8);
-            armlift2.setPower(0.8);
-            //this.auto_hold();
-
-        } else if (position == 2) {
-            armlift1.setTargetPosition(-200);
-            armlift1.setTargetPosition(-200);
-            this.auto_hold();
-
-        } else if (position == 3) { //highest
             armlift1.setTargetPosition(-300);
-            armlift2.setTargetPosition(-300);
-
-
-            armlift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            armlift2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            armlift1.setPower(0.8);
-            armlift2.setPower(0.8);
-            //this.auto_hold();
+            arm
         }
 
+        if (position == 2) {
 
+        }
 
-//        while(armlift1.isBusy() && armlift2.isBusy()) {
-//
-//        }
+        if (position == 3) {
 
-//        armlift1.setPower(0);
-//        armlift2.setPower(0);
-    }
+        }
 
-
-    public void auto_hold (){ //Stephen took out "int position"
-        //armlift1.setTargetPosition(armlift1.getCurrentPosition());
-        //armlift2.setTargetPosition(armlift2.getCurrentPosition());
         armlift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armlift2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        armlift1.setPower(0.6);
-        armlift2.setPower(0.6);
+        armlift1.setPower(0.75);
+        armlift2.setPower(0.75);
+        while (armlift1.isBusy() && armlift2.isBusy()) {}
+        armlift1.setPower(0);
+        armlift2.setPower(0);
     }
-
-    public void hold_stop(){
-        armlift1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    }
-
 
 
     public void get_telemetry (Telemetry telemetry) {
