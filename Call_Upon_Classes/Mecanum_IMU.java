@@ -127,7 +127,7 @@ public class Mecanum_IMU {
 
 
         while (isBusy()) {
-            correction = checkDirection();
+            correction = checkDirection() * tipsyturnsy;
             //if positive correction needed, needs to go counter-clockwise -> adds power to front
             //if negative, needs to go clockwise -> adds power to back
 
@@ -148,7 +148,7 @@ public class Mecanum_IMU {
 
 
         while (isBusy()) {
-            correction = checkDirection();
+            correction = checkDirection() * tipsyturnsy;
             //if positive correction needed, needs to go counter-clockwise -> adds power to front
             //if negative, needs to go clockwise -> adds power to back
 
@@ -165,7 +165,7 @@ public class Mecanum_IMU {
     public void turnToReset(double power) {
         this.set_mode_RWE_motors();
         while(Math.abs(getAngle()) > 1) {
-            correction = checkDirection();
+            correction = checkDirection() * tipsyturnsy;
 
             if (correction > 0) { //positive correction needed - need to go counterclockwise
                 fl.setPower(-1 * power);
