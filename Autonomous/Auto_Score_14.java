@@ -11,7 +11,7 @@ public class Auto_Score_14 extends org.firstinspires.ftc.teamcode.Auto_Base_14 {
 
         waitForStart();
 
-        armlifts.arm_auto(1);
+        armlifts.arm_auto(3);
 
     }
 

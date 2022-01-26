@@ -69,18 +69,18 @@ public class Arm_14954 {
 
     public void arm_auto (int position) {
         if (position == 1) {
-            armlift1.setTargetPosition(-300);
-            armlift2.setTargetPosition(-300);
-        }
-
-        if (position == 2) {
             armlift1.setTargetPosition(-200);
             armlift2.setTargetPosition(-200);
         }
 
+        if (position == 2) {
+            armlift1.setTargetPosition(-300);
+            armlift2.setTargetPosition(-300);
+        }
+
         if (position == 3) {
-            armlift1.setTargetPosition(-100);
-            armlift2.setTargetPosition(-100);
+            armlift1.setTargetPosition(-400);
+            armlift2.setTargetPosition(-400);
         }
 
         armlift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
