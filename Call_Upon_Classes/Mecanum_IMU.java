@@ -152,10 +152,10 @@ public class Mecanum_IMU {
             //if positive correction needed, needs to go counter-clockwise -> adds power to front
             //if negative, needs to go clockwise -> adds power to back
 
-            fl.setPower(power + correction);
-            bl.setPower(-1 * (power - correction));
-            fr.setPower(-1 * (power + correction));
-            br.setPower(power - correction);
+            fl.setPower(power - correction);
+            bl.setPower(-1 * (power + correction));
+            fr.setPower(-1 * (power - correction));
+            br.setPower(power + correction);
 
         }
         setPowerAll(0);

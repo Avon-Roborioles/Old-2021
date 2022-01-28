@@ -22,17 +22,17 @@ public class Auto_Blue_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base
 
         imu_drive.setZero();
 
-        imu_drive.strafeRight(.8, 12);
+        imu_drive.strafeRight(.8, 10);
 
        auto_motors.goToSpot(-20, .75);
 
        auto_carousel.run_carousel_auto_14(telemetry,false);
 
-        imu_drive.turnToReset(1);
+//        imu_drive.turnToReset(1);
 
         auto_motors.goToSpot(5,.75);
 
-        imu_drive.strafeRight(.75, 30);
+        imu_drive.strafeRight(1, 30);
 
         auto_motors.goToSpot(-9, .75);
 
