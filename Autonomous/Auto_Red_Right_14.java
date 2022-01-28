@@ -19,11 +19,11 @@ public class Auto_Red_Right_14 extends org.firstinspires.ftc.teamcode.Auto_Base_
 
         waitForStart();
 
+        imu_drive.setZero();
+
         auto_motors.goToSpot(36, .75);
 
-        auto_motors.strafeLeft(.75,35);
-
-        auto_motors.turn45left(.6);
+        imu_drive.strafeLeft(.75,35);
 
 
         Thread.sleep( 10000);

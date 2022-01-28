@@ -13,9 +13,11 @@ public class Auto_Blue_Left_14 extends org.firstinspires.ftc.teamcode.Auto_Base_
 
         waitForStart();
 
+        imu_drive.setZero();
+
         auto_motors.goToSpot(35, .75);
 
-        auto_motors.strafeRight(.75, 30);
+        imu_drive.strafeRight(.75, 30);
 
 
        Thread.sleep( 10000);
