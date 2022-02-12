@@ -110,16 +110,16 @@ public class Carousel_Call{
 
 
     }
-//
-//    public void stop_carousel_auto (Telemetry telemetry) {
 
-//        carousel.setPower(-0.3);
-//        get_telemetry(telemetry);
-//        try {
-//            Thread.sleep(100);
-//        } catch (InterruptedException e) {
-//        }
-//    }
+    public void carousel_auto_SM(Telemetry telemetry) {
+        double speed=.3;
+        carousel.setPower(speed);
+        get_telemetry(telemetry);
+    }
+
+    public void carousel_auto_SM_stop() {
+        carousel.setPower(0);
+    }
 
     public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("End Ramp Speed", displayFinalSpeed);

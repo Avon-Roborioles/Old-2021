@@ -83,7 +83,11 @@ public class Mecanum_Methods_Autonomus {
         inches*=91;
         setRelativeTargetAll(inches);
         setPowerAll(power);
-        while (isBusy()){}
+//        while (isBusy()){}
+    }
+
+    public void stopMotors() {
+        setPowerAll(0);
     }
 
     public void turn90left (double power){
