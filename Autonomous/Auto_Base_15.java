@@ -12,6 +12,8 @@ public abstract class Auto_Base_15 extends LinearOpMode {
     protected org.firstinspires.ftc.teamcode.Turntable_15455 turntable = new org.firstinspires.ftc.teamcode.Turntable_15455();
 
     protected org.firstinspires.ftc.teamcode.Mecanum_IMU imu_drive = new org.firstinspires.ftc.teamcode.Mecanum_IMU();
+    protected org.firstinspires.ftc.teamcode.Mecanum_IMU_States imu_drive_states = new org.firstinspires.ftc.teamcode.Mecanum_IMU_States();
+    protected org.firstinspires.ftc.teamcode.StateController sc = new org.firstinspires.ftc.teamcode.StateController();
 
     protected int inchToTicks = 91;
     protected int scorePosition;
@@ -26,6 +28,7 @@ public abstract class Auto_Base_15 extends LinearOpMode {
         turntable.init_turntable(hardwareMap,telemetry,  "turntable");
 
         imu_drive.init_drive_motors(hardwareMap, telemetry, false);
+        imu_drive_states.init_drive_motors(hardwareMap, telemetry, false);
 
 
     }

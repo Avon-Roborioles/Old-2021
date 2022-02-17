@@ -1,19 +1,19 @@
-package org.firstinspires.ftc.teamcode.2021.AutoStateMachines;
+package org.firstinspires.ftc.teamcode;
 
 import org.firstinspires.ftc.teamcode.State;
 import java.util.ArrayList;
 
 public class StateController {
 
-    public ArrayList<ArrayList<State>> allStates;
-    ArrayList<State> currentStates;
-    int nextStateNum = 0;
+    private ArrayList<ArrayList<State>> allStates;
+    private ArrayList<State> currentStates;
+    private int nextStateNum = 0;
 
     public void getStates(ArrayList<ArrayList<State>> states) {
         this.allStates = states;
     }
 
-    public void changeState() {
+    private void changeState() {
         currentStates = allStates.get(nextStateNum);
         nextStateNum += 1;
     }
@@ -25,14 +25,16 @@ public class StateController {
                 currentStates.get(i).start();
             }
             while(!currentStates.isEmpty()) {
-                for(int i = 0; i < currentStates.size(); i++) {
-                    if(currentStates.get(i).checkDone()) {
+                ArrayList<State> statesToDelete = new ArrayList<State>(); //add states to here so that we don't get concurrent editing error
+                for (int i = 0; i < currentStates.size(); i++) {
+                    currentStates.get(i).doWhileNotDone(); //for things like IMU driving where it corrects as it goes
+                    if (currentStates.get(i).checkDone()) {
                         currentStates.get(i).stop();
+                        statesToDelete.add(currentStates.get(i));
                     }
                 }
+                currentStates.removeAll(statesToDelete);
             }
-//            while (!currentState.checkDone()) {}
-//            currentState.stop();
         }
     }
 
