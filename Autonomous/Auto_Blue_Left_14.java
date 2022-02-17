@@ -16,25 +16,53 @@ public class Auto_Blue_Left_14 extends org.firstinspires.ftc.teamcode.Auto_Base_
         this.init_classes(false);
 
         StateController sc = new StateController();
-        ArrayList<State> states = new ArrayList<State>();
+        ArrayList<ArrayList<State>> states = new ArrayList<ArrayList<State>>();
         //populate states
-        states.add(new State() {
-
+        ArrayList<State> states1 = new ArrayList<State>();
+        states1.add(new State() {
             @Override
             public void start() {
+                armlifts.arm_auto(2);
+            }
+            @Override
+            public void doWhileNotDone() {
 
             }
-
             @Override
             public boolean checkDone() {
-                return false;
+                return armlifts.isBusy();
             }
-
             @Override
             public void stop() {
-
+                armlifts.arm_stop_stay();
             }
         });
+        states1.add(new org.firstinspires.ftc.teamcode.StraightDriveState(12, 1, imu_drive_states));
+        states.add(states1);
+
+        ArrayList<State> states2 = new ArrayList<State>();
+        states2.add(new org.firstinspires.ftc.teamcode.StrafeLeftState(10, 1, imu_drive_states));
+        states2.add(new State() {
+            int i = 0;
+            @Override
+            public void start() {
+                auto_carousel.carousel_auto_SM(telemetry);
+            }
+            @Override
+            public void doWhileNotDone() {
+                i++;
+            }
+            @Override
+            public boolean checkDone() {
+                return i > 1500;
+            }
+            @Override
+            public void stop() {
+                auto_carousel.carousel_auto_SM_stop();
+            }
+        });
+        states.add(states2);
+
         sc.getStates(states);
 
         waitForStart();

@@ -87,11 +87,20 @@ public class Arm_14954 {
         armlift2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armlift1.setPower(0.75);
         armlift2.setPower(0.75);
-        while (armlift1.isBusy() && armlift2.isBusy()) {}
-        armlift1.setPower(0);
-        armlift2.setPower(0);
+//        while (armlift1.isBusy() && armlift2.isBusy()) {}
+//        armlift1.setPower(0);
+//        armlift2.setPower(0);
     }
 
+    public void arm_stop_stay () {
+        armlift1.setPower(.1);
+        armlift2.setPower(.1);
+    }
+
+
+    public boolean isBusy() {
+        return armlift1.isBusy() && armlift2.isBusy();
+    }
 
     public void get_telemetry (Telemetry telemetry) {
         telemetry.addData("Armlift Speed", speed);

@@ -11,6 +11,8 @@ public abstract class Auto_Base_14 extends LinearOpMode {
     protected org.firstinspires.ftc.teamcode.Intake_14954 intake = new org.firstinspires.ftc.teamcode.Intake_14954();
 
     protected org.firstinspires.ftc.teamcode.Mecanum_IMU imu_drive = new org.firstinspires.ftc.teamcode.Mecanum_IMU();
+    protected org.firstinspires.ftc.teamcode.Mecanum_IMU_States imu_drive_states = new org.firstinspires.ftc.teamcode.Mecanum_IMU_States();
+    protected org.firstinspires.ftc.teamcode.StateController sc = new org.firstinspires.ftc.teamcode.StateController();
 
     protected int inchToTicks = 91;
     protected int scorePosition;
@@ -23,6 +25,8 @@ public abstract class Auto_Base_14 extends LinearOpMode {
         distance_sensor.initDistance(hardwareMap, telemetry, red_alliance);
        boolean flip = red_alliance;
         imu_drive.init_drive_motors(hardwareMap, telemetry, flip);
+
+        imu_drive_states.init_drive_motors(hardwareMap, telemetry, false);
     }
     public void sense_barcode (){
         scorePosition = 3; //furthest to the right, won't be changed if it doesn't see 1 or 2
